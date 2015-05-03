@@ -12,7 +12,7 @@ public class WelcomeViewController {
     @RequestMapping(value ="", method = RequestMethod.GET)
     public String viewWelcomePage(Model model) {
         System.out.println("test");
-        return "welcomeForm.page";
+        return "welcome.page";
     }
 
 }
