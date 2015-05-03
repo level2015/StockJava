@@ -24,6 +24,9 @@
             <artifactId>service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!--Три нижележащие зависимости отвечают за подключение дополнительных библиотек-->
+        <!--Spring MVC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -42,18 +45,8 @@
             <version>4.1.5.RELEASE</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.jackson</groupId>-->
-            <!--<artifactId>jackson-mapper-asl</artifactId>-->
-            <!--<version>1.9.13</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.jackson</groupId>-->
-            <!--<artifactId>jackson-core-asl</artifactId>-->
-            <!--<version>1.9.13</version>-->
-        <!--</dependency>-->
-
+        <!--Три нижележащие зависимости отвечают за подключение дополнительных библиотек-->
+        <!--Jackson для возможности выполнять ответ JSONом в Spring-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -72,7 +65,8 @@
             <version>2.5.1</version>
         </dependency>
 
-
+        <!--Три нижележащие зависимости отвечают за подключение дополнительных библиотек-->
+        <!--Tiles для возможности выполнять шаблонные страницы для View в Spring-->
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-core</artifactId>

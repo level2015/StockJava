@@ -20,7 +20,7 @@
     <!--за передачу содержимого веб-страницы по ее имени-->
     <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
     <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
-    <mvc:resources mapping="/images/**" location="/images/"></mvc:resources>
+    <!--<mvc:resources mapping="/images/**" location="/images/"></mvc:resources>-->
 
     <!--Указание класса, который будет выступать ViewResolver, в данном случае это Tiles для Spring-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
