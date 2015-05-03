@@ -40,3 +40,7 @@ html { background: url(images/bg.png) repeat; min-height: 100%; box-sizing: bord
 #login input.login-ok::-webkit-input-placeholder { color: #4E831F; }
 
 #login p.login-msg { display: none; margin: 0 0 5px; font-size: 13px; font-weight: bold; color: #C4550B; }
+
+.error{
+    color: red;
+}

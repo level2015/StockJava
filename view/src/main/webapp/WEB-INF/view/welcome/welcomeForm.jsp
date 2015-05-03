@@ -6,7 +6,8 @@
     <title>Welcome</title>
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
     <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="js/jquery-validate.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <%--<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>--%>
     <script src="/js/form.js"></script>
     <%--<link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">--%>
     <%--<link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">--%>
@@ -36,8 +37,8 @@
             <h1>Авторизация</h1>
             <fieldset>
                 <form id="loginForm">
-                    <input type="email" placeholder="Логин или Email" required />
-                    <input type="password" placeholder="Пароль" required />
+                    <input type="email" name="login" placeholder="Логин или Email" required />
+                    <input type="password" name="password" placeholder="Пароль" required />
                     <input type="submit" value="ВОЙТИ" />
                 </form>
 
