@@ -5,8 +5,8 @@ $(document).ready(function(){
         rules:{
             email:{
                 required: true,
-                email: true,
-                maxlength: 16
+                email: true
+
             },
             password:{
                 required: true,
@@ -24,8 +24,7 @@ $(document).ready(function(){
         messages:{
             email:{
                 required: "Это поле обязательно для заполнения",
-                email:"Это не email",
-                maxlength: "Максимальное число символо - 16"
+                email:"Это не email"
             },
             password:{
                 required: "Это поле обязательно для заполнения",
