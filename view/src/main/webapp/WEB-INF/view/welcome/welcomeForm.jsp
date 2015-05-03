@@ -24,7 +24,7 @@
                 <p class="login-msg"></p>
                 <form id="registerForm" method="get" action="welcome">
                     <input type="email" name="email" placeholder="Введите Ваш email адрес..." required />
-                    <input type="password" name="password" placeholder="Ваш сложный пароль..." required />
+                    <input type="password" id="password" name="password" placeholder="Ваш сложный пароль..." required />
                     <input type="password" name="confirmPassword" placeholder="Подтверждение пароля..." required />
                     <input type="text" placeholder="Имя пользователя" required />
                     <input type="submit" value="Зарегистрироваться" />
