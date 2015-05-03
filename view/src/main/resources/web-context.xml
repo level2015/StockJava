@@ -6,8 +6,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <context:component-scan base-package="com.levelup.spring.view" />
+    <!--Указание пакета для поиска бинов-->
+    <context:component-scan base-package="com.levelup.stock.view" />
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven >
@@ -16,9 +16,17 @@
         <!--</mvc:message-converters>-->
     </mvc:annotation-driven>
 
+    <!--Относительные пути к файлам, которые не будут обрабатываться ViewResolver - класс отвечающий-->
+    <!--за передачу содержимого веб-страницы по ее имени-->
     <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
     <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
 
+    <!--Указание класса, который будет выступать ViewResolver, в данном случае это Tiles для Spring-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </bean>
+
+    <!--Конфигурация для Tiles ViewResolver-->
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
             <list>
@@ -29,7 +37,8 @@
     </bean>
 
 
-
+    <!--Относительные пути к файлам, которые не будут обрабатываться ViewResolver - класс отвечающий-->
+    <!--за передачу содержимого веб-страницы по ее имени-->
     <!--<bean id="viewResolver"-->
           <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
@@ -37,7 +46,5 @@
         <!--<property name="suffix" value=".jsp"/>-->
     <!--</bean>-->
 
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
-    </bean>
+
 </beans>
