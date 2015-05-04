@@ -1,12 +1,17 @@
 package com.levelup.stock.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by SMULL on 4/29/2015.
- */
+@Entity
+@Table(name = "DEAL")
 public class Deal implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID")
+    Long id;
+    @Column(name = "USER_ID")
+    Long userId;
     private String type;
     private String ticket;
     private String symbol;

@@ -1,18 +1,24 @@
 package com.levelup.stock.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
-/**
- * Created by SMULL on 4/29/2015.
- */
-
+@Entity
+@Table(name = "USER")
 public class User implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="ID")
     private Long id;
     private String login;
     private String password;
+    @OneToMany(targetEntity = Deal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="USER_ID", referencedColumnName = "ID")
+    List<Deal> deals;
 
     public User() {
+
     }
 
     public Long getId() {

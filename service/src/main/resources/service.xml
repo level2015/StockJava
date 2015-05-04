@@ -10,28 +10,11 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
     <import resource="classpath:dao.xml"></import>
 
     <context:component-scan base-package="com.levelup.spring.service"></context:component-scan>
 
-
     <tx:annotation-driven></tx:annotation-driven>
-
-    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
-            <!--<property name="packagesToScan" value="com.levelup.spring.model" />-->
-            <!--<property name="jpaVendorAdapter">-->
-                <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />-->
-            <!--</property>-->
-            <!--<property name="jpaProperties">-->
-             <!--<props>-->
-                 <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
-                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
-
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -44,55 +27,4 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!--<bean id="teacherService" class="com.levelup.spring.service.impl.TeacherServiceImpl" init-method="init2" destroy-method="destroy2">-->
-        <!--<property name="teacherRepository" ref="teacherRepository"></property>-->
-    <!--</bean>-->
-
-    <!--<bean id="hondaCar" class="com.levelup.spring.model.HondaCar"></bean>-->
-
-    <!--<bean id="toyotaCar" class="com.levelup.spring.model.ToyotaCar"></bean>-->
-
-    <!--<bean id="hyundaiCar" class="com.levelup.spring.model.HyundaiCar"></bean>-->
-
-
-    <!--<bean id="toyota" class="com.levelup.spring.model.CarFactory" factory-method="getToyotaCar"></bean>-->
-
-    <!--<bean id="honda" class="com.levelup.spring.model.CarFactory" factory-method="getHondaCar"></bean>-->
-
-    <!--<bean id="carFactory" class="com.levelup.spring.model.CarFactory"></bean>-->
-
-    <!--<bean id="hyundai" class="com.levelup.spring.model.Car" factory-bean="carFactory" factory-method="getHyundaiCar"></bean>-->
-
-    <!--<bean id="car" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
-        <!--<property name="targetObject" ref="carFactory"></property>-->
-        <!--<property name="targetMethod" value="getCar"></property>-->
-        <!--<property name="arguments">-->
-            <!--<list>-->
-                <!--<value type="java.lang.String">Toyota</value>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--<util:list id="cars" list-class="java.util.ArrayList" value-type="com.levelup.spring.model.Car">-->
-       <!--<ref bean="hondaCar"></ref>-->
-       <!--<ref bean="toyotaCar"></ref>-->
-
-    <!--</util:list>-->
-
-    <!--<util:set id="mySet" value-type="java.lang.Object">-->
-        <!--<ref bean="hyundai"></ref>-->
-        <!--<value type="java.lang.String">Test</value>-->
-        <!--<value>12</value>-->
-    <!--</util:set>-->
-
-    <!--<bean id="value2" class="java.lang.String">-->
-        <!--<constructor-arg value="test2"></constructor-arg>-->
-    <!--</bean>-->
-
-    <!--<util:map id="myMap" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">-->
-        <!--<entry key="key1" >-->
-            <!--<value>test1</value>-->
-        <!--</entry>-->
-        <!--<entry key="key2" value-ref="value2"></entry>-->
-    <!--</util:map>-->
 </beans>
