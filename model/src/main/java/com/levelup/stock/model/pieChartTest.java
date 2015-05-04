@@ -1,16 +1,13 @@
 package com.levelup.stock.model;
 
-/**
- * Created by Eugene on 03.05.2015.
- */
-public class pieChartTest {
+public class PieChartTest {
     private String nameOfCurrency;
     private Float share;
 
-    public pieChartTest() {
+    public PieChartTest() {
     }
 
-    public pieChartTest(String nameOfCurrency, Float share) {
+    public PieChartTest(String nameOfCurrency, Float share) {
         this.nameOfCurrency = nameOfCurrency;
         this.share = share;
     }

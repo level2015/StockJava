@@ -100,31 +100,33 @@ Highcharts.theme = {
 Highcharts.setOptions(Highcharts.theme);
 
 //Текстовые надписи на графике
-var titleOfChart='Доля компаний на рынке фастфуда, 2015';
-var nameOfPositionInChart='Доля рынка';
+var xAxisDates=[
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+];
+var yAxisData='Profit ($)';
+var titleOfChart='Monthly average profit';
+var subtitleOfChart='Source: New York Stock Exchange';
 
 //Запрос к серверу на получение данных по клику по кнопке
 $.ajax({
     type: "POST",
-    url:"/diagram/pieChart/data",
+    url:"/diagram/basicColumnChart/data",
     data: {dateBegin: "24-04-15", dateEnd: "30-04-15"},
     dataType: "json",
     success: function(dataResponse){
-        //Парсер полученных данных для графика
-        var name = Array();
-        var data = Array();
-        var dataArrayFinal = Array();
-        for(i=0;i<dataResponse.length;i++) {
-            name[i] = dataResponse[i].nameOfCurrency;
-            data[i] = dataResponse[i].share;
-        }
-
-        for(j=0;j<name.length;j++) {
-            var temp = new Array(name[j],data[j]);
-            dataArrayFinal[j] = temp;
-        }
         //Вызов отрисовки графика
-        showPieChart(dataArrayFinal);
+        showBasicColumnChart(dataResponse);
     },
     error: function (jqXHR, textStatus, errorThrown){
         alert(textStatus);
@@ -132,52 +134,43 @@ $.ajax({
 });
 
 //Функция отрисовки графика по полученным данным
-function showPieChart(dataArray) {
+function showBasicColumnChart(dataResponse) {
     $(function () {
-
-        // Radialize the colors
-        Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
-            return {
-                radialGradient: {cx: 0.5, cy: 0.3, r: 0.7},
-                stops: [
-                    [0, color],
-                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-                ]
-            };
-        });
-
-        // Build the chart
         $('#container').highcharts({
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
+                type: 'column'
             },
             title: {
                 text: titleOfChart
             },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            subtitle: {
+                text: subtitleOfChart
             },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        },
-                        connectorColor: 'silver'
-                    }
+            xAxis: {
+                categories: xAxisDates,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: yAxisData
                 }
             },
-            series: [{
-                type: 'pie',
-                name: nameOfPositionInChart,
-                data: dataArray
-            }]
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} $</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: dataResponse
         });
     });
 }
