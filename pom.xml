@@ -12,8 +12,6 @@
         <module>dao</module>
         <module>service</module>
         <module>view</module>
-        <module>rest</module>
-        <module>rest-cfx</module>
     </modules>
     <packaging>pom</packaging>
 

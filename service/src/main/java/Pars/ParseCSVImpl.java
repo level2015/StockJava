@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class ParseCSV {
+public class ParseCSVImpl {
     public ArrayList<ArrayList<String>> parseCSV(String fileName, int... param) {
 
         BufferedReader fileReader = null;

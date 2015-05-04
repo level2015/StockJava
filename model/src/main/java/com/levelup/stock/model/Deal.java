@@ -1,7 +1,9 @@
 package com.levelup.stock.model;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "DEAL")
@@ -10,29 +12,38 @@ public class Deal implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     Long id;
+
     @Column(name = "USER_ID")
     Long userId;
-    private String Type;
-    private String Ticket;
-    private String Symbol;
-    private String Lots;
-    private String BuySell;
-    private String OpenPrice;
-    private String ClosePrice;
-    private String OpenTime;
-    private String CloseTime;
-    private String Profit;
-    private String Swap;
-    private String Commission;
-    private String TP;
-    private String SL;
-    private String Pips;
-    private String Result;
-    private String TradeDuration;
-    private String MagicNumber;
-    private String OrderComment;
-    private String MAE;
-    private String MFE_FX_Blue_Live_account;
+
+    private String type;
+    private String ticket;
+    private String symbol;
+
+    private double lots;
+    private String buySell;
+    private double openPrice;
+    private double closePrice;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date openTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date closeTime;
+
+    private double profit;
+    private double swap;
+    private String commission;
+    private double tp;
+    private double sl;
+    private double pips;
+    private String result;
+    private double tradeDuration;
+    private String magicNumber;
+    private String orderComment;
+    private double mae;
+    private double mfe;
+    private String fXBlueLiveAccount;
 
 
     public Deal() {
@@ -55,170 +66,179 @@ public class Deal implements Serializable {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public String getTicket() {
-        return Ticket;
+        return ticket;
     }
 
     public void setTicket(String ticket) {
-        Ticket = ticket;
+        this.ticket = ticket;
     }
 
     public String getSymbol() {
-        return Symbol;
+        return symbol;
     }
 
     public void setSymbol(String symbol) {
-        Symbol = symbol;
+        this.symbol = symbol;
     }
 
-    public String getLots() {
-        return Lots;
+
+    public double getLots() {
+        return lots;
     }
 
-    public void setLots(String lots) {
-        Lots = lots;
+    public void setLots(double lots) {
+        this.lots = lots;
     }
 
     public String getBuySell() {
-        return BuySell;
+        return buySell;
     }
 
     public void setBuySell(String buySell) {
-        BuySell = buySell;
+        this.buySell = buySell;
     }
 
-    public String getOpenPrice() {
-        return OpenPrice;
+    public double getOpenPrice() {
+        return openPrice;
     }
 
-    public void setOpenPrice(String openPrice) {
-        OpenPrice = openPrice;
+    public void setOpenPrice(double openPrice) {
+        this.openPrice = openPrice;
     }
 
-    public String getClosePrice() {
-        return ClosePrice;
+    public double getClosePrice() {
+        return closePrice;
     }
 
-    public void setClosePrice(String closePrice) {
-        ClosePrice = closePrice;
+    public void setClosePrice(double closePrice) {
+        this.closePrice = closePrice;
     }
 
-    public String getOpenTime() {
-        return OpenTime;
+    public Date getOpenTime() {
+        return openTime;
     }
 
-    public void setOpenTime(String openTime) {
-        OpenTime = openTime;
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
     }
 
-    public String getCloseTime() {
-        return CloseTime;
+    public Date getCloseTime() {
+        return closeTime;
     }
 
-    public void setCloseTime(String closeTime) {
-        CloseTime = closeTime;
+    public void setCloseTime(Date closeTime) {
+        this.closeTime = closeTime;
     }
 
-    public String getProfit() {
-        return Profit;
+    public double getProfit() {
+        return profit;
     }
 
-    public void setProfit(String profit) {
-        Profit = profit;
+    public void setProfit(double profit) {
+        this.profit = profit;
     }
 
-    public String getSwap() {
-        return Swap;
+    public double getSwap() {
+        return swap;
     }
 
-    public void setSwap(String swap) {
-        Swap = swap;
+    public void setSwap(double swap) {
+        this.swap = swap;
     }
 
     public String getCommission() {
-        return Commission;
+        return commission;
     }
 
     public void setCommission(String commission) {
-        Commission = commission;
+        this.commission = commission;
     }
 
-    public String getTP() {
-        return TP;
+    public double getTp() {
+        return tp;
     }
 
-    public void setTP(String TP) {
-        this.TP = TP;
+    public void setTp(double tp) {
+        this.tp = tp;
     }
 
-    public String getSL() {
-        return SL;
+    public double getSl() {
+        return sl;
     }
 
-    public void setSL(String SL) {
-        this.SL = SL;
+    public void setSl(double sl) {
+        this.sl = sl;
     }
 
-    public String getPips() {
-        return Pips;
+    public double getPips() {
+        return pips;
     }
 
-    public void setPips(String pips) {
-        Pips = pips;
+    public void setPips(double pips) {
+        this.pips = pips;
     }
 
     public String getResult() {
-        return Result;
+        return result;
     }
 
     public void setResult(String result) {
-        Result = result;
+        this.result = result;
     }
 
-    public String getTradeDuration() {
-        return TradeDuration;
+    public double getTradeDuration() {
+        return tradeDuration;
     }
 
-    public void setTradeDuration(String tradeDuration) {
-        TradeDuration = tradeDuration;
+    public void setTradeDuration(double tradeDuration) {
+        this.tradeDuration = tradeDuration;
     }
 
     public String getMagicNumber() {
-        return MagicNumber;
+        return magicNumber;
     }
 
     public void setMagicNumber(String magicNumber) {
-        MagicNumber = magicNumber;
+        this.magicNumber = magicNumber;
     }
 
     public String getOrderComment() {
-        return OrderComment;
+        return orderComment;
     }
 
     public void setOrderComment(String orderComment) {
-        OrderComment = orderComment;
+        this.orderComment = orderComment;
     }
 
-    public String getMAE() {
-        return MAE;
+    public double getMae() {
+        return mae;
     }
 
-    public void setMAE(String MAE) {
-        this.MAE = MAE;
+    public void setMae(double mae) {
+        this.mae = mae;
     }
 
-    public String getMFE_FX_Blue_Live_account() {
-        return MFE_FX_Blue_Live_account;
+    public double getMfe() {
+        return mfe;
     }
 
-    public void setMFE_FX_Blue_Live_account(String MFE_FX_Blue_Live_account) {
-        this.MFE_FX_Blue_Live_account = MFE_FX_Blue_Live_account;
+    public void setMfe(double mfe) {
+        this.mfe = mfe;
+    }
+
+    public String getfXBlueLiveAccount() {
+        return fXBlueLiveAccount;
+    }
+
+    public void setfXBlueLiveAccount(String fXBlueLiveAccount) {
+        this.fXBlueLiveAccount = fXBlueLiveAccount;
     }
 }
