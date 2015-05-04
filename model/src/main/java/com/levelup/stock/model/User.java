@@ -11,8 +11,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="ID")
     private Long id;
-    private String login;
+    private String email;
     private String password;
+    private String name;
     @OneToMany(targetEntity = Deal.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="USER_ID", referencedColumnName = "ID")
     List<Deal> deals;
@@ -29,12 +30,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String login) {
+        this.email = login;
     }
 
     public String getPassword() {
@@ -43,5 +44,21 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
