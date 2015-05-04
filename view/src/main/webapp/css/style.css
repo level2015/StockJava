@@ -26,10 +26,10 @@ html { background: url(images/bg.png) repeat; min-height: 100%; box-sizing: bord
 
 /* flip animation */
 .flip { position: relative; -webkit-transition: 0.6s; -webkit-transform-style: preserve-3d; }
-.form-login,
-.form-signup { position: absolute; top: 0; left: 0; -webkit-backface-visibility: hidden; }
-.form-signup { z-index: 2; }
-.form-login { -webkit-transform: rotateY(180deg); }
+.form-signup,
+.form-login { position: absolute; top: 0; left: 0; -webkit-backface-visibility: hidden; }
+.form-login { z-index: 2; }
+.form-signup { -webkit-transform: rotateY(180deg); }
 .flip.flipped { -webkit-transform: rotateY(-180deg); }
 
 #login input.login-err,

@@ -47,12 +47,12 @@ public class UserController {
 
         ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
 
-        List<Deal> deals = parseJacksonCSV.parse("C:/Users/SMULL/Downloads/orders-example.csv");
-        for (Deal deal : deals) {
-            //System.out.println(deal.getOpenTime() + " " + deal.getCloseTime());
-             deal.setUserId(user.getId());
-             dealService.create(deal);
-        }
+//        List<Deal> deals = parseJacksonCSV.parse("f://orders-example.csv");
+//        for (Deal deal : deals) {
+//            //System.out.println(deal.getOpenTime() + " " + deal.getCloseTime());
+//             deal.setUserId(user.getId());
+//             dealService.create(deal);
+//        }
 
 
 
