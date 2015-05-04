@@ -29,7 +29,7 @@ public class Deal implements Serializable {
     private String Pips;
     private String Result;
     private String TradeDuration;
-    private String MagicNnumber;
+    private String MagicNumber;
     private String OrderComment;
     private String MAE;
     private String MFE_FX_Blue_Live_account;
@@ -190,12 +190,12 @@ public class Deal implements Serializable {
         TradeDuration = tradeDuration;
     }
 
-    public String getMagicNnumber() {
-        return MagicNnumber;
+    public String getMagicNumber() {
+        return MagicNumber;
     }
 
-    public void setMagicNnumber(String magicNnumber) {
-        MagicNnumber = magicNnumber;
+    public void setMagicNumber(String magicNumber) {
+        MagicNumber = magicNumber;
     }
 
     public String getOrderComment() {

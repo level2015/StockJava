@@ -1,4 +1,5 @@
 package Pars;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -58,11 +59,11 @@ public class ParseCSV {
                     ArrayList<String> myString = new ArrayList<String>();
                     String[] tokens = line.split(DELIMITER);
                     for (String token : tokens) {
-                        if (!(token.equals("") || token.equals(" "))) {
-                            myString.add(token);
-                        }
-                        cells.add(myString);
+                        // if (!(token.equals("") || token.equals(" "))) {
+                        myString.add(token);
+                        //  }
                     }
+                    cells.add(myString);
                 }
             }
         } catch (Exception e) {
@@ -121,11 +122,11 @@ public class ParseCSV {
                     String[] tokens = line.split(Delimiter);
 
                     for (String token : tokens) {
-                        if (!(token.equals("") || token.equals(" "))) {
-                            myString.add(token);
-                        }
-                        cells.add(myString);
+                        //     if (!(token.equals("") || token.equals(" "))) {
+                        myString.add(token);
+                        //    }
                     }
+                    cells.add(myString);
                 }
             }
         } catch (Exception e) {
