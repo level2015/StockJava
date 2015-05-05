@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
-    <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css" />
+    <script type="text/javascript" src="/js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
     <%--<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>--%>
     <script src="/js/form.js"></script>
     <%--<link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">--%>
@@ -36,14 +36,14 @@
         <div class="form-login">
             <h1>Авторизация</h1>
             <fieldset>
-                <form id="loginForm">
-                    <input type="email" name="login" placeholder="Логин или Email" required />
+                <form id="loginForm" action="/user/signIn" method="post">
+                    <input type="email" name="email" placeholder="Email он же логин" required />
                     <input type="password" name="password" placeholder="Пароль" required />
                     <input type="submit" value="ВОЙТИ" />
                 </form>
 
                 <p><a href="#" class="flipper">Нет аккаунта? Регистрация.</a><br>
-                    <a href="#">Забыли пароль?</a></p>
+                    <%--<a href="#">Забыли пароль?</a></p>--%>
             </fieldset>
         </div>
     </div>

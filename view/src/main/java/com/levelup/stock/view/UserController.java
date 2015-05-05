@@ -30,16 +30,19 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createUser(Model model,
-                                @RequestParam String email,
-                                @RequestParam String password,
-                                @RequestParam String name) {
+                             @RequestParam String email,
+                             @RequestParam String password,
+                             @RequestParam String name) {
 
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);
-        user = userService.create(user);
-
+        if (userService.checkUserByEmail(user)) {
+            return "pieChart.page";
+        } else {
+            user = userService.create(user);
+        }
 
 
 //        ParseCSVImpl myParse = new ParseCSVImpl();
@@ -53,7 +56,6 @@ public class UserController {
 //             deal.setUserId(user.getId());
 //             dealService.create(deal);
 //        }
-
 
 
 //        for(int i=0; i<pars.size();i++){
@@ -84,5 +86,20 @@ public class UserController {
 //            dealService.create(deal);
 //}
         return "welcome.page";
+    }
+
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
+    public String signInUser(Model model,
+                             @RequestParam String email,
+                             @RequestParam String password) {
+
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+
+        if (userService.checkUserByEmailAndPassword(user)) {
+            return "pieChart.page";
+        } else {
+        return "welcome.page";}
     }
 }

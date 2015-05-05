@@ -15,9 +15,12 @@ $(document).ready(function(){
             },
             confirmPassword:{
                 required: true,
-                minlength: 6,
-                maxlength: 16,
                 equalTo: "#password"
+            },
+            name:{
+                required: true,
+                minlength: 6,
+                maxlength: 16
             }
         },
 
@@ -34,6 +37,11 @@ $(document).ready(function(){
             confirmPassword:{
                 required: "Это поле обязательно для заполнения",
                 equalTo:"Не совпадает с паролем"
+            },
+            name:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Имя должно быть минимум 4 символа",
+                maxlength: "Имя должно быть не более 16 символов"
             }
         }
     });
@@ -42,21 +50,20 @@ $(document).ready(function(){
         rules:{
             login:{
                 required: true,
-                minlength: 4,
-                maxlength: 16
+                minlength: 6
             },
             password:{
                 required: true,
                 minlength: 6,
-                maxlength: 16
+                maxlength: 35
             }
         },
 
         messages:{
             login:{
                 required: "Это поле обязательно для заполнения",
-                minlength: "Логин должен быть минимум 4 символа",
-                maxlength: "Максимальное число символо - 16"
+                minlength: "Логин не может быть менее 6 символов",
+                maxlength: "Максимальное число символо - 35"
             },
 
             password:{
