@@ -1,14 +1,33 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: denis_zavadsky
-  Date: 4/4/15
-  Time: 10:46 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="menu-content">
-  <%--<ul>--%>
-    <%--<li><a href="#"> Main</a></li>--%>
-    <%--<li><a href="#"> About</a></li>--%>
-  <%--</ul>--%>
+<div class="sidebartop">
+
+</div>
+<div id="sidebarcontent">
+  <h2>User menu</h2>
+  <ul>
+    <li>
+      <a href="#">Drop Box</a>    </li>
+    <li>
+      <a href="#">Charts</a>    </li>
+    <li>
+      <a href="#">Menu 1</a>    </li>
+    <li>
+      <a href="#">Menu 2</a>    </li>
+    <li>
+      <a href="#">Menu 3</a>    </li>
+  </ul>
+
+  <h2>Admin menu</h2>
+  <ul>
+    <li>
+      <a href="#">Menu 1</a>    </li>
+    <li>
+      <a href="#">Menu 2</a>    </li>
+    <li>
+      <a href="#">Menu 3</a>    </li>
+    <li>
+      <a href="#">Menu 4</a>    </li>
+    <li>
+      <a href="#">Menu 5</a>    </li>
+  </ul>
 </div>

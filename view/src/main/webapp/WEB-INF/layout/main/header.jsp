@@ -1,11 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: denis_zavadsky
-  Date: 4/4/15
-  Time: 10:46 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="header-content">
+<ul id="topmenu">
+  <li><a href="#">Home</a> </li>
+  <li><a href="tables.html">Menu 1</a> </li>
+  <li><a href="forms.html">Menu 2</a></li>
+  <li><a href="others.html">Menu 3</a></li>
 
-</div>
+</ul>
+<div class="clear"></div>
+<h1 id="sitename"><a href="#">Stock Exchange</a> <span class="description">Best solutions for analytics</span></h1>

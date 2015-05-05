@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: denis_zavadsky
-  Date: 4/4/15
-  Time: 10:47 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="footer-content">
+<p>Copyright &copy; yourwebsite.com | <a href="#">Some</a> | <a href="#">Links</a> | <a href="#">Here</a> </p>
+<p id="credit"><a href="#">CSS Template</a> by RamblingSoul | <a href="http://free-templates.ru">Free-Templates.ru</a></p>
 
-</div>
+

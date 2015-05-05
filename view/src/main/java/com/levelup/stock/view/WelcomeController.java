@@ -14,4 +14,9 @@ public class WelcomeController {
         return "welcome.page";
     }
 
+    @RequestMapping(value ="/mainPage", method = RequestMethod.GET)
+    public String viewMainPage(Model model) {
+        return "main.page";
+    }
+
 }
