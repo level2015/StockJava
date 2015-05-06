@@ -27,28 +27,32 @@ public class UserController {
     @Autowired
     DealService dealService;
 
+    @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+    public String createUser(Model model, @RequestParam String email) {
+        User user = new User();
+        user.setEmail(email);
+        if (userService.checkUserByEmail(user)) {
+            return "messageRegister.page";
+        }
+        return "null.page";
+    }
+
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createUser(Model model,
                              @RequestParam String email,
                              @RequestParam String password,
                              @RequestParam String name) {
-
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);
-        if (userService.checkUserByEmail(user)) {
-            return "pieChart.page";
-        } else {
-            user = userService.create(user);
-        }
 
+            user = userService.create(user);
 
 //        ParseCSVImpl myParse = new ParseCSVImpl();
 //        ArrayList<ArrayList<String>> pars = myParse.parseCSV("f://orders-example.csv");
-
-        ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
+      //  ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
 
 //        List<Deal> deals = parseJacksonCSV.parse("f://orders-example.csv");
 //        for (Deal deal : deals) {
@@ -56,8 +60,6 @@ public class UserController {
 //             deal.setUserId(user.getId());
 //             dealService.create(deal);
 //        }
-
-
 //        for(int i=0; i<pars.size();i++){
 //            Deal deal = new Deal();
 //            int j=-1;
@@ -85,21 +87,21 @@ public class UserController {
 //            deal.setUserId(user.getId());
 //            dealService.create(deal);
 //}
-        return "welcome.page";
+        return "main.page";
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String signInUser(Model model,
                              @RequestParam String email,
                              @RequestParam String password) {
-
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
 
         if (userService.checkUserByEmailAndPassword(user)) {
-            return "pieChart.page";
+            return "null.page";
         } else {
-        return "welcome.page";}
+            return "messageLogin.page";
+        }
     }
 }

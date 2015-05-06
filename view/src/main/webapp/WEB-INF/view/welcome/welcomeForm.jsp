@@ -22,12 +22,13 @@
             <h1>Регистрация</h1>
             <fieldset>
                 <p class="login-msg"></p>
-                <form action="/user/create" method="post" id="registerForm" >
-                    <input type="email" name="email" placeholder="Введите Ваш email адрес..." required />
-                    <input type="password" id="password" name="password" placeholder="Ваш сложный пароль..." required />
-                    <input type="password" name="confirmPassword" placeholder="Подтверждение пароля..." required />
-                    <input type="text" name="name" placeholder="Имя пользователя" required />
-                    <input type="submit" value="Зарегистрироваться" />
+                <form  id="registerForm" action="/user/create" method="post">
+                    <span class="error" id="spanRegister"></span>
+                    <input type="email" class="input" id="emailRegister" name="email" placeholder="Введите Ваш email адрес..." required />
+                    <input type="password" class="input" id="passwordRegister" name="password" placeholder="Ваш сложный пароль..." required />
+                    <input type="password" class="input" name="confirmPassword" placeholder="Подтверждение пароля..." required />
+                    <input type="text" class="input" name="name" id="name" placeholder="Имя пользователя" required />
+                    <input type="submit" id="buttonRegister" value="Зарегистрироваться" />
                 </form>
 
                 <a href="#" class="flipper">Уже зарегистрированы? Войти.</a>
@@ -37,9 +38,10 @@
             <h1>Авторизация</h1>
             <fieldset>
                 <form id="loginForm" action="/user/signIn" method="post">
-                    <input type="email" name="email" placeholder="Email он же логин" required />
-                    <input type="password" name="password" placeholder="Пароль" required />
-                    <input type="submit" value="ВОЙТИ" />
+                    <span class="error" id="spanLogin"></span>
+                    <input class="input" type="email" id="emailLogin" name="email" placeholder="Email он же логин" required />
+                    <input class="input" type="password" id="passwordLogin" name="password" placeholder="Пароль" required />
+                    <input type="button" id="buttonLogin" value="ВОЙТИ" />
                 </form>
 
                 <p><a href="#" class="flipper">Нет аккаунта? Регистрация.</a><br>

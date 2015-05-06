@@ -1,44 +1,44 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     $("#registerForm").validate({
 
-        rules:{
-            email:{
+        rules: {
+            email: {
                 required: true,
                 email: true
 
             },
-            password:{
+            password: {
                 required: true,
                 minlength: 6,
                 maxlength: 16
             },
-            confirmPassword:{
+            confirmPassword: {
                 required: true,
-                equalTo: "#password"
+                equalTo: "#passwordRegister"
             },
-            name:{
+            name: {
                 required: true,
-                minlength: 6,
+                minlength: 4,
                 maxlength: 16
             }
         },
 
-        messages:{
-            email:{
+        messages: {
+            email: {
                 required: "Это поле обязательно для заполнения",
-                email:"Это не email"
+                email: "Это не email"
             },
-            password:{
+            password: {
                 required: "Это поле обязательно для заполнения",
                 minlength: "Пароль должен быть минимум 6 символа",
                 maxlength: "Пароль должен быть максимум 16 символов"
             },
-            confirmPassword:{
+            confirmPassword: {
                 required: "Это поле обязательно для заполнения",
-                equalTo:"Не совпадает с паролем"
+                equalTo: "Не совпадает с паролем"
             },
-            name:{
+            name: {
                 required: "Это поле обязательно для заполнения",
                 minlength: "Имя должно быть минимум 4 символа",
                 maxlength: "Имя должно быть не более 16 символов"
@@ -47,35 +47,99 @@ $(document).ready(function(){
     });
     $("#loginForm").validate({
 
-        rules:{
-            login:{
+        rules: {
+            email: {
                 required: true,
-                minlength: 6
+                email: true,
+                maxlength: 35
             },
-            password:{
+            password: {
                 required: true,
                 minlength: 6,
-                maxlength: 35
+                maxlength: 16
             }
         },
 
-        messages:{
-            login:{
+        messages: {
+            email: {
                 required: "Это поле обязательно для заполнения",
-                minlength: "Логин не может быть менее 6 символов",
-                maxlength: "Максимальное число символо - 35"
+                maxlength: "Максимальное число символо - 35",
+                email: "Введите корректный E-mail адрес"
             },
 
-            password:{
+            password: {
                 required: "Это поле обязательно для заполнения",
                 minlength: "Пароль должен быть минимум 6 символа",
                 maxlength: "Пароль должен быть максимум 16 символов"
             }
         }
 
+
     });
-    $('a.flipper').click(function(){
+    $('a.flipper').click(function () {
         $('.flip').toggleClass('flipped');
     });
+
+    $("#emailRegister").focusin(function () {
+        $("#emailRegister").focusout(function () {
+            if(($("#emailRegister").valid())==true){
+            $.ajax({
+                type: "POST",
+                url: "/user/checkEmail",
+                data: {
+                    email: $("#emailRegister").val()
+                },
+
+                success: function (data) {
+                        $("#spanRegister").html(data);
+                }
+            })}
+        });
+    });
+
+    //$("#buttonRegister").click(function () {
+    //
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "/user/create",
+    //            data: {
+    //                email: $("#emailRegister").val(),
+    //                password: $("#passwordRegister").val(),
+    //                name: $("#name").val()
+    //            },
+    //
+    //
+    //            success: function () {
+    //
+    //                    window.location.href = "/welcome/mainPage";
+    //
+    //                }
+    //
+    //        })
+    //
+    //});
+
+    $("#buttonLogin").click(function () {
+        if(($("#loginForm").valid())==true){
+        $.ajax({
+            type: "POST",
+            url: "/user/signIn",
+            data: {email: $("#emailLogin").val(), password: $("#passwordLogin").val()},
+            success: function (data) {
+                if (data == "") {
+                    window.location.href = "/welcome/mainPage";
+                } else {
+                    $("#spanLogin").html(data);
+                }
+            }
+        })}
+    });
+
+    $(".input").focus(function () {
+        $("#spanLogin").html("");
+        $("#spanRegister").html("");
+    });
+
+
 
 });
