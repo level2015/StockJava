@@ -22,13 +22,14 @@
             <h1>Регистрация</h1>
             <fieldset>
                 <p class="login-msg"></p>
-                <form  id="registerForm" action="/user/create" method="post">
+                <%--action="/user/create" method="post"--%>
+                <form  id="registerForm" >
                     <span class="error" id="spanRegister"></span>
                     <input type="email" class="input" id="emailRegister" name="email" placeholder="Введите Ваш email адрес..." required />
                     <input type="password" class="input" id="passwordRegister" name="password" placeholder="Ваш сложный пароль..." required />
                     <input type="password" class="input" name="confirmPassword" placeholder="Подтверждение пароля..." required />
                     <input type="text" class="input" name="name" id="name" placeholder="Имя пользователя" required />
-                    <input type="submit" id="buttonRegister" value="Зарегистрироваться" />
+                    <input type="button" id="buttonRegister" value="Зарегистрироваться" />
                 </form>
 
                 <a href="#" class="flipper">Уже зарегистрированы? Войти.</a>
@@ -41,7 +42,7 @@
                     <span class="error" id="spanLogin"></span>
                     <input class="input" type="email" id="emailLogin" name="email" placeholder="Email он же логин" required />
                     <input class="input" type="password" id="passwordLogin" name="password" placeholder="Пароль" required />
-                    <input type="button" id="buttonLogin" value="ВОЙТИ" />
+                    <input type="submit" id="buttonLogi" value="ВОЙТИ" />
                 </form>
 
                 <p><a href="#" class="flipper">Нет аккаунта? Регистрация.</a><br>

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <ul id="topmenu">
   <li><a href="#">Home</a> </li>
   <li><a href="tables.html">Menu 1</a> </li>
   <li><a href="forms.html">Menu 2</a></li>
-  <li><a href="others.html">Menu 3</a></li>
+  <li><a href="others.html">${user.email}</a></li>
 
 </ul>
 <div class="clear"></div>

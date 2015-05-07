@@ -2,6 +2,7 @@ package com.levelup.stock.view;
 
 import Pars.ParseCSVImpl;
 import com.levelup.spring.dao.ParseJacksonCSV;
+import com.levelup.spring.dao.UserRepository;
 import com.levelup.spring.dao.impl.DealJacksonCSVImpl;
 import com.levelup.spring.dao.impl.DealOpenCSVImpl;
 import com.levelup.spring.service.DealService;
@@ -11,27 +12,32 @@ import com.levelup.stock.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("user")
 public class UserController {
 
     @Autowired
     UserService userService;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     DealService dealService;
+
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     public String createUser(Model model, @RequestParam String email) {
+
         User user = new User();
         user.setEmail(email);
+
         if (userService.checkUserByEmail(user)) {
+
             return "messageRegister.page";
         }
         return "null.page";
@@ -39,20 +45,22 @@ public class UserController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createUser(Model model,
+    public String createUser(Model model, @ModelAttribute("user") User user,
                              @RequestParam String email,
                              @RequestParam String password,
                              @RequestParam String name) {
-        User user = new User();
+        //User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);
-
-            user = userService.create(user);
-
+        if (userService.checkUserByEmail(user)) {
+            return "messageRegister.page";
+        }else{
+            userService.create(user);
+            return "null.page";}
 //        ParseCSVImpl myParse = new ParseCSVImpl();
 //        ArrayList<ArrayList<String>> pars = myParse.parseCSV("f://orders-example.csv");
-      //  ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
+        //  ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
 
 //        List<Deal> deals = parseJacksonCSV.parse("f://orders-example.csv");
 //        for (Deal deal : deals) {
@@ -87,19 +95,30 @@ public class UserController {
 //            deal.setUserId(user.getId());
 //            dealService.create(deal);
 //}
-        return "main.page";
+
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public String signInUser(Model model,
+    public String signInUser(Model model, @ModelAttribute("user") User user,
                              @RequestParam String email,
                              @RequestParam String password) {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
+        // User user = new User();
+        System.out.println(user.getEmail());
+        if (user.getEmail()==null || user.getPassword()==null) {
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setName("ddd");
+        }
+        // user2 = (User)userRepository.getUserByEmail(email);
+        //    System.out.println(user.getEmail());
 
+// if(userService.getUserByEmail(email).isEmpty()){
+//        System.out.println("1");}else{
+//     System.out.println(userService.getUserByEmail(email).get(0).toString());
+// }
         if (userService.checkUserByEmailAndPassword(user)) {
-            return "null.page";
+
+            return "main.page";
         } else {
             return "messageLogin.page";
         }

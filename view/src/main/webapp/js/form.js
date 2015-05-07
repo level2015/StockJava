@@ -80,59 +80,64 @@ $(document).ready(function () {
         $('.flip').toggleClass('flipped');
     });
 
-    $("#emailRegister").focusin(function () {
-        $("#emailRegister").focusout(function () {
-            if(($("#emailRegister").valid())==true){
+    $("#emailRegister").focusout(function () {
+            //  $("#emailRegister").focusout(function () {
+            if (($("#emailRegister").valid()) == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "/user/checkEmail",
+                    data: {
+                        email: $("#emailRegister").val()
+                    },
+
+                    success: function (data) {
+                        $("#spanRegister").html(data);
+                    }
+                })
+            }
+            //  });
+        }
+    )
+
+    $("#buttonRegister").click(function () {
+        if (($("#registerForm").valid()) == true) {
             $.ajax({
                 type: "POST",
-                url: "/user/checkEmail",
+                url: "/user/create",
                 data: {
-                    email: $("#emailRegister").val()
+                    email: $("#emailRegister").val(),
+                    password: $("#passwordRegister").val(),
+                    name: $("#name").val()
                 },
 
+
                 success: function (data) {
+                    if (data == "") {
+                        window.location.href = "/welcome/mainPage";
+                    } else {
                         $("#spanRegister").html(data);
+                    }
                 }
-            })}
-        });
+
+            })
+        }
     });
 
-    //$("#buttonRegister").click(function () {
-    //
-    //        $.ajax({
-    //            type: "POST",
-    //            url: "/user/create",
-    //            data: {
-    //                email: $("#emailRegister").val(),
-    //                password: $("#passwordRegister").val(),
-    //                name: $("#name").val()
-    //            },
-    //
-    //
-    //            success: function () {
-    //
-    //                    window.location.href = "/welcome/mainPage";
-    //
-    //                }
-    //
-    //        })
-    //
-    //});
-
     $("#buttonLogin").click(function () {
-        if(($("#loginForm").valid())==true){
-        $.ajax({
-            type: "POST",
-            url: "/user/signIn",
-            data: {email: $("#emailLogin").val(), password: $("#passwordLogin").val()},
-            success: function (data) {
-                if (data == "") {
-                    window.location.href = "/welcome/mainPage";
-                } else {
-                    $("#spanLogin").html(data);
+        if (($("#loginForm").valid()) == true) {
+            $.ajax({
+                type: "POST",
+                url: "/user/signIn",
+                data: {email: $("#emailLogin").val(), password: $("#passwordLogin").val()},
+                success: function (data) {
+                    if (data == "") {
+                        window.location.href = "/welcome/mainPage";
+                    } else {
+                        $("#spanLogin").html(data);
+                    }
                 }
-            }
-        })}
+            })
+        }
     });
 
     $(".input").focus(function () {
@@ -141,5 +146,5 @@ $(document).ready(function () {
     });
 
 
-
-});
+})
+;
