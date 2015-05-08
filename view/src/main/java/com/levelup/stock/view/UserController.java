@@ -1,21 +1,13 @@
 package com.levelup.stock.view;
 
-import Pars.ParseCSVImpl;
-import com.levelup.spring.dao.ParseJacksonCSV;
 import com.levelup.spring.dao.UserRepository;
-import com.levelup.spring.dao.impl.DealJacksonCSVImpl;
-import com.levelup.spring.dao.impl.DealOpenCSVImpl;
 import com.levelup.spring.service.DealService;
 import com.levelup.spring.service.UserService;
-import com.levelup.stock.model.Deal;
 import com.levelup.stock.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -102,13 +94,13 @@ public class UserController {
     public String signInUser(Model model, @ModelAttribute("user") User user,
                              @RequestParam String email,
                              @RequestParam String password) {
-        // User user = new User();
-        System.out.println(user.getEmail());
-        if (user.getEmail()==null || user.getPassword()==null) {
+//         User user = new User();
+//        System.out.println(user.getEmail());
+//        if (user.getEmail()==null || user.getPassword()==null) {
             user.setEmail(email);
             user.setPassword(password);
-            user.setName("ddd");
-        }
+//            user.setName("ddd");
+//        }
         // user2 = (User)userRepository.getUserByEmail(email);
         //    System.out.println(user.getEmail());
 
@@ -117,7 +109,12 @@ public class UserController {
 //     System.out.println(userService.getUserByEmail(email).get(0).toString());
 // }
         if (userService.checkUserByEmailAndPassword(user)) {
-
+            user.setUser(userService.getUserByEmail(email).get(0));
+//            user = userService.getUserByEmail(email).get(0);
+//            ArrayList<User> users = (ArrayList<User>)userService.getUserByEmail(email);
+//            user.setName(users.get(0).getName());
+//
+//     model.addAttribute("userok", users.get(0));
             return "main.page";
         } else {
             return "messageLogin.page";

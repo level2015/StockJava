@@ -4,7 +4,7 @@
   <li><a href="#">Home</a> </li>
   <li><a href="tables.html">Menu 1</a> </li>
   <li><a href="forms.html">Menu 2</a></li>
-  <li><a href="others.html">${user.email}</a></li>
+  <li><a href="others.html">${user.email} ${user.name} ${user.password} ${user.id}</a></li>
 
 </ul>
 <div class="clear"></div>
