@@ -13,7 +13,7 @@
   </div>
   <div id="tabcontent">
     <h3>Круговая диаграмма</h3>
-    <input id="showButtonPC" type="submit" value="Show chart!">
+    <input id="showButtonPC" type="button" value="Show chart!">
     <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
     <script>
 
