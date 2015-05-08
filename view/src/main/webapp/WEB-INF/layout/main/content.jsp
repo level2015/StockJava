@@ -2,9 +2,9 @@
 <div id="tab">
   <div id="tabhead">
     <ul>
-      <li class="activetab"><a href="#">PieChart</a></li>
+      <li class="activetab"><a href="#">About charts</a></li>
+      <li><a href="#">PieChart</a></li>
       <li><a href="#">BasicColumn</a></li>
-      <li><a href="#">Chart1</a></li>
       <li><a href="#">Chart2</a></li>
       <li><a href="#">Chart3</a></li>
     </ul>

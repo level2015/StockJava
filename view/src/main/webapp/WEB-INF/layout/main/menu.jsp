@@ -8,7 +8,7 @@
     <li>
       <a href="#">Drop Box</a>    </li>
     <li>
-      <a href="#">Charts</a>    </li>
+      <a href="/diagram/about">Charts</a>    </li>
     <li>
       <a href="#">Menu 1</a>    </li>
     <li>

@@ -6,6 +6,12 @@
 <head>
     <title><tiles:getAsString name="main.title"></tiles:getAsString></title>
     <link href="/css/mainPage/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/js/jquery-ui-1.11.2/jquery-ui.css"/>
+    <script src="/js/jquery-1.11.2.js"></script>
+    <script src="/js/jquery-ui-1.11.2/jquery-ui.js"></script>
+    <script src="/js/highCharts/highcharts.js"></script>
+    <script src="/js/highCharts/modules/exporting.js"></script>
+    <script src="/js/pieChart.js"></script>
 
 </head>
 

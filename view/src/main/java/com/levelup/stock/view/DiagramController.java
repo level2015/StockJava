@@ -15,6 +15,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/diagram")
 public class DiagramController {
+
+    //    О диаграммах
+    @RequestMapping(value ="/about", method = RequestMethod.GET)
+    public String viewAboutCharts(Model model) {
+        return "charts.page";
+    }
+
 //    Круговая диаграмма и передача данных для ее отрисовки
     @RequestMapping(value ="/pieChart", method = RequestMethod.GET)
     public String viewPieChart(Model model) {
