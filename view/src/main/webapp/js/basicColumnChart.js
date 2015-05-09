@@ -1,6 +1,27 @@
 $(document).ready(function () {
-   // $("#showButtonBC").click(function () {
-
+    //Выбор даты с/по
+    $(function() {
+        $( "#from" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3,
+            onClose: function( selectedDate ) {
+                $( "#to" ).datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( "#to" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3,
+            onClose: function( selectedDate ) {
+                $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    });
+//Действие по нажатию кнопки "показать"
+    $("#showButtonBC").click(function () {
+        var dateFrom = $( "#from" ).datepicker( "getDate" );
+        var dateTo = $( "#to" ).datepicker( "getDate" );
 //Текстовые надписи на графике
         var xAxisDates = [
             'Jan',
@@ -24,7 +45,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/diagram/basicColumnChart/data",
-            data: {dateBegin: "24-04-15", dateEnd: "30-04-15"},
+            data: {dateBegin: dateFrom.getTime(), dateEnd: dateTo.getTime()},
             dataType: "json",
             success: function (dataResponse) {
                 //Вызов отрисовки графика
@@ -178,5 +199,5 @@ $(document).ready(function () {
                 });
             });
         }
-  //  });
+    });
 });

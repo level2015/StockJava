@@ -2,15 +2,15 @@
 <div id="tab">
   <div id="tabhead">
     <ul>
-      <li class="activetab"><a href="/diagram/about">About charts</a></li>
-      <li><a href="/diagram/pieChart">Pie chart</a></li>
-      <li><a href="/diagram/basicColumnChart">Basic column chart</a></li>
+      <li class="activetab"><a href="/diagram/about">О диаграммах</a></li>
+      <li><a href="/diagram/pieChart">Круговая диаграмма</a></li>
+      <li><a href="/diagram/basicColumnChart">Столбчатая диаграмма</a></li>
       <li><a href="#">Chart2</a></li>
       <li><a href="#">Chart3</a></li>
     </ul>
   </div>
   <div id="tabcontent">
-    <h3>Диаграмма</h3>
+    <h3 align="center">Диаграмма</h3>
     <p>Диагра́мма (греч. Διάγραμμα (diagramma) — изображение, рисунок, чертёж) —
       графическое представление данных линейными отрезками или геометрическими
       фигурами, позволяющее быстро оценить соотношение нескольких величин.

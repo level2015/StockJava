@@ -3,31 +3,31 @@
 
 </div>
 <div id="sidebarcontent">
-  <h2>User menu</h2>
+  <h2>Меню пользователя</h2>
   <ul>
     <li>
-      <a href="#">Drop Box</a>    </li>
+      <a href="#">Исходные данные</a>    </li>
     <li>
-      <a href="/diagram/about">Charts</a>    </li>
+      <a href="/diagram/about">Диаграммы</a>    </li>
     <li>
-      <a href="#">Menu 1</a>    </li>
+      <a href="#">Меню 1</a>    </li>
     <li>
-      <a href="#">Menu 2</a>    </li>
+      <a href="#">Меню 2</a>    </li>
     <li>
-      <a href="#">Menu 3</a>    </li>
+      <a href="#">Меню 3</a>    </li>
   </ul>
 
-  <h2>Admin menu</h2>
+  <h2>Меню администратора</h2>
   <ul>
     <li>
-      <a href="#">Menu 1</a>    </li>
+      <a href="#">Меню 1</a>    </li>
     <li>
-      <a href="#">Menu 2</a>    </li>
+      <a href="#">Меню 2</a>    </li>
     <li>
-      <a href="#">Menu 3</a>    </li>
+      <a href="#">Меню 3</a>    </li>
     <li>
-      <a href="#">Menu 4</a>    </li>
+      <a href="#">Меню 4</a>    </li>
     <li>
-      <a href="#">Menu 5</a>    </li>
+      <a href="#">Меню 5</a>    </li>
   </ul>
 </div>

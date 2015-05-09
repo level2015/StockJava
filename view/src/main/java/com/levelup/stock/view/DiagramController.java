@@ -29,8 +29,8 @@ public class DiagramController {
     }
 
     @RequestMapping(value ="/pieChart/data", produces = "application/json", method = RequestMethod.POST)
-    public @ResponseBody List<PieChartTest> getDataListForPieChart(@RequestParam("dateBegin") String dateBegin,
-                                                        @RequestParam("dateEnd") String dateEnd) {
+    public @ResponseBody List<PieChartTest> getDataListForPieChart(@RequestParam("dateBegin") Long dateFrom,
+                                                        @RequestParam("dateEnd") Long dateTo) {
         List<PieChartTest> dataList = new ArrayList<PieChartTest>();
         dataList.add(new PieChartTest("McDonald's", 30.5f));
         dataList.add(new PieChartTest("King Burger", 25.5f));
@@ -46,8 +46,8 @@ public class DiagramController {
     }
 
     @RequestMapping(value ="/basicColumnChart/data", produces = "application/json", method = RequestMethod.POST)
-    public @ResponseBody List<BasicColumnChart> getDataListForBasicColumn(@RequestParam("dateBegin") String dateBegin,
-                                                        @RequestParam("dateEnd") String dateEnd) {
+    public @ResponseBody List<BasicColumnChart> getDataListForBasicColumn(@RequestParam("dateBegin") Long dateBegin,
+                                                        @RequestParam("dateEnd") Long dateEnd) {
         List<BasicColumnChart> dataList = new ArrayList<BasicColumnChart>();
         List<Integer> dataForChart = new ArrayList();
         dataForChart.add(10);
