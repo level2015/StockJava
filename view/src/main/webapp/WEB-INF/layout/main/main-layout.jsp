@@ -12,6 +12,7 @@
     <script src="/js/highCharts/highcharts.js"></script>
     <script src="/js/highCharts/modules/exporting.js"></script>
     <script src="/js/pieChart.js"></script>
+    <script src="/js/basicColumnChart.js"></script>
 
 </head>
 

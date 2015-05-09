@@ -3,6 +3,8 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="basicColumnChart1.page" template="/WEB-INF/view/basicColumnChart/basicColumnChart.jsp">
+    <definition name="basicColumnChart.page" extends="main.page">
+        <put-attribute name="main.title" value="Basic column chart" />
+        <put-attribute name="main.content" value="/WEB-INF/view/charts/basicColumnChart/basicColumnChart.jsp" />
     </definition>
 </tiles-definitions>

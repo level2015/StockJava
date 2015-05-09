@@ -1,7 +1,6 @@
-
 $(document).ready(function () {
     $("#showButtonPC").click(function () {
-        alert("AAAAA");
+
 //Текстовые надписи на графике
         var titleOfChart = 'Доля компаний на рынке фастфуда, 2015';
         var nameOfPositionInChart = 'Доля рынка';
