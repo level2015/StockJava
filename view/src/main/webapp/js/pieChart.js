@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#showButtonPC").click(function () {
+  //  $("#showButtonPC").click(function () {
 
 //Текстовые надписи на графике
         var titleOfChart = 'Доля компаний на рынке фастфуда, 2015';
@@ -186,5 +186,5 @@ $(document).ready(function () {
             });
         };
 
-    });
+   // });
 });

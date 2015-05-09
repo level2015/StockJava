@@ -11,8 +11,8 @@
     <script src="/js/jquery-ui-1.11.2/jquery-ui.js"></script>
     <script src="/js/highCharts/highcharts.js"></script>
     <script src="/js/highCharts/modules/exporting.js"></script>
-    <script src="/js/pieChart.js"></script>
-    <script src="/js/basicColumnChart.js"></script>
+    <%--<script src="/js/pieChart.js"></script>--%>
+    <%--<script src="/js/basicColumnChart.js"></script>--%>
 
 </head>
 

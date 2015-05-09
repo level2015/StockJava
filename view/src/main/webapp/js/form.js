@@ -131,7 +131,7 @@ $(document).ready(function () {
                 data: {email: $("#emailLogin").val(), password: $("#passwordLogin").val()},
                 success: function (data) {
                     if (data == "") {
-                        window.location.href = "/welcome/mainPage";
+                        window.location.href = "/diagram/pieChart";
                     } else {
                         $("#spanLogin").html(data);
                     }

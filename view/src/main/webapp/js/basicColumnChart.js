@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#showButtonBC").click(function () {
+   // $("#showButtonBC").click(function () {
 
 //Текстовые надписи на графике
         var xAxisDates = [
@@ -178,5 +178,5 @@ $(document).ready(function () {
                 });
             });
         }
-    });
+  //  });
 });
