@@ -113,7 +113,7 @@ $(document).ready(function () {
 
                 success: function (data) {
                     if (data == "") {
-                        window.location.href = "/welcome/mainPage";
+                        window.location.href = "/diagram/pieChart";
                     } else {
                         $("#spanRegister").html(data);
                     }
