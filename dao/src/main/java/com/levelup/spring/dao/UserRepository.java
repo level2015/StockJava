@@ -21,4 +21,6 @@ public interface UserRepository {
     public Boolean checkUserByEmail(User user);
 
     public Boolean checkUserByEmailAndPassword(User user);
+
+    public User getUserById(Long id);
 }
