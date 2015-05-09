@@ -24,7 +24,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
     @Override
     public List<User> getUserByEmail(String email) {
 
-        Query query = entityManager.createNativeQuery("select * from user u where u.email = :userEmail");
+        Query query = entityManager.createQuery("from User u where u.email = :userEmail");
         query.setParameter("userEmail", email.toLowerCase());
         List<User> users = query.getResultList();
         return users;
@@ -41,7 +41,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 
     @Override
     public Boolean checkUserByEmailAndPassword(User user) {
-        Query query = entityManager.createNativeQuery("select * from user u where u.email = :userEmail and u.password=:userPassword");
+        Query query = entityManager.createQuery("from User u where u.email = :userEmail and u.password=:userPassword");
 
         query.setParameter("userEmail", user.getEmail().toLowerCase());
         query.setParameter("userPassword", user.getPassword());
@@ -50,6 +50,20 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
             return false;
         } else {
             return true;
+        }
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(String email, String password) {
+        Query query = entityManager.createQuery("from User u where u.email = :userEmail and u.password=:userPassword");
+
+        query.setParameter("userEmail", email.toLowerCase());
+        query.setParameter("userPassword", password);
+        List<User> users = query.getResultList();
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
         }
     }
 }

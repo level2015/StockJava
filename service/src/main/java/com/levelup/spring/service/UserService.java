@@ -17,7 +17,9 @@ public interface UserService {
 
     public List<User> getUserByEmail(String email);
 
-    public Boolean checkUserByEmail (User user);
+    public User getUserByEmailAndPassword(String email, String password);
+
+    public Boolean checkUserByEmail(User user);
 
     public Boolean checkUserByEmailAndPassword(User user);
 

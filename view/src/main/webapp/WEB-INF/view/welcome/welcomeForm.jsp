@@ -42,7 +42,7 @@
                     <span class="error" id="spanLogin"></span>
                     <input class="input" type="email" id="emailLogin" name="email" placeholder="Email он же логин" required />
                     <input class="input" type="password" id="passwordLogin" name="password" placeholder="Пароль" required />
-                    <input type="submit" id="buttonLogi" value="ВОЙТИ" />
+                    <input type="button" id="buttonLogin" value="ВОЙТИ" />
                 </form>
 
                 <p><a href="#" class="flipper">Нет аккаунта? Регистрация.</a><br>

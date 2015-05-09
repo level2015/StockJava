@@ -46,6 +46,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserByEmailAndPassword(String email, String password) {
+        return userRepository.getUserByEmailAndPassword(email, password);
+    }
+
+    @Override
     public Boolean checkUserByEmail(User user) {
         return userRepository.checkUserByEmail(user);
     }

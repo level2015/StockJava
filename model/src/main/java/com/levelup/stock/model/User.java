@@ -61,4 +61,11 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setUser(User user){
+        this.name=user.getName();
+        this.id = user.getId();
+        this.password= user.getPassword();
+        this.email=user.getEmail();
+    }
 }

@@ -41,15 +41,15 @@ public class UserController {
                              @RequestParam String email,
                              @RequestParam String password,
                              @RequestParam String name) {
-        //User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);
         if (userService.checkUserByEmail(user)) {
             return "messageRegister.page";
-        }else{
+        } else {
             userService.create(user);
-            return "null.page";}
+            return "null.page";
+        }
 //        ParseCSVImpl myParse = new ParseCSVImpl();
 //        ArrayList<ArrayList<String>> pars = myParse.parseCSV("f://orders-example.csv");
         //  ParseJacksonCSV parseJacksonCSV = new DealOpenCSVImpl();
@@ -87,35 +87,17 @@ public class UserController {
 //            deal.setUserId(user.getId());
 //            dealService.create(deal);
 //}
-
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String signInUser(Model model, @ModelAttribute("user") User user,
                              @RequestParam String email,
                              @RequestParam String password) {
-//         User user = new User();
-//        System.out.println(user.getEmail());
-//        if (user.getEmail()==null || user.getPassword()==null) {
-            user.setEmail(email);
-            user.setPassword(password);
-//            user.setName("ddd");
-//        }
-        // user2 = (User)userRepository.getUserByEmail(email);
-        //    System.out.println(user.getEmail());
 
-// if(userService.getUserByEmail(email).isEmpty()){
-//        System.out.println("1");}else{
-//     System.out.println(userService.getUserByEmail(email).get(0).toString());
-// }
-        if (userService.checkUserByEmailAndPassword(user)) {
-            user.setUser(userService.getUserByEmail(email).get(0));
-//            user = userService.getUserByEmail(email).get(0);
-//            ArrayList<User> users = (ArrayList<User>)userService.getUserByEmail(email);
-//            user.setName(users.get(0).getName());
-//
-//     model.addAttribute("userok", users.get(0));
-            return "main.page";
+        User user2 = userService.getUserByEmailAndPassword(email, password);
+        if (user2 != null) {
+         user.setUser(user2);
+            return "null.page";
         } else {
             return "messageLogin.page";
         }
