@@ -20,7 +20,18 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 
     public UserRepositoryImpl() {
     }
+    @Override
+    public User getUserById(Long id) {
 
+        Query query = entityManager.createQuery("from User u where u.id = :userID");
+        query.setParameter("userID", id);
+        List<User> users = query.getResultList();
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
     @Override
     public List<User> getUserByEmail(String email) {
 

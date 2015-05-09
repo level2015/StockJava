@@ -8,6 +8,8 @@ import com.levelup.stock.model.Deal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("dealService")
 public class DealServiceImpl implements DealService {
 
@@ -35,5 +37,10 @@ public class DealServiceImpl implements DealService {
     @Override
     public Boolean delete(Long id) {
         return dealRepository.delete(id,Deal.class);
+    }
+
+    @Override
+    public List<String> getAllUniqeSymbol(String userEmail) {
+        return dealRepository.getAllUniqeSymbol(userEmail);
     }
 }
