@@ -1,61 +1,64 @@
 $(document).ready(function () {
     //Выбор даты с/по
-    $(function() {
-        $( "#from" ).datepicker({
+    $(function () {
+        $("#from").datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 3,
-            onClose: function( selectedDate ) {
-                $( "#to" ).datepicker( "option", "minDate", selectedDate );
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
             }
         });
-        $( "#to" ).datepicker({
+        $("#to").datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             numberOfMonths: 3,
-            onClose: function( selectedDate ) {
-                $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
             }
         });
     });
 //Действие по нажатию кнопки "показать"
     $("#showButtonBC").click(function () {
-        var dateFrom = $( "#from" ).datepicker( "getDate" );
-        var dateTo = $( "#to" ).datepicker( "getDate" );
+        var dateFrom = $("#from").datepicker("getDate");
+        var dateTo = $("#to").datepicker("getDate");
+        if ((dateFrom === null) || (dateTo === null)) {
+            alert("Не все даты указаны! Пожалуйста, проверьте еще раз.");
+        } else {
 //Текстовые надписи на графике
-        var xAxisDates = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ];
-        var yAxisData = 'Profit ($)';
-        var titleOfChart = 'Monthly average profit';
-        var subtitleOfChart = 'Source: New York Stock Exchange';
+            var xAxisDates = [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ];
+            var yAxisData = 'Profit ($)';
+            var titleOfChart = 'Monthly average profit';
+            var subtitleOfChart = 'Source: New York Stock Exchange';
 
 //Запрос к серверу на получение данных по клику по кнопке
-        $.ajax({
-            type: "POST",
-            url: "/diagram/basicColumnChart/data",
-            data: {dateBegin: dateFrom.getTime(), dateEnd: dateTo.getTime()},
-            dataType: "json",
-            success: function (dataResponse) {
-                //Вызов отрисовки графика
-                showBasicColumnChart(dataResponse);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus);
-            }
-        });
-
+            $.ajax({
+                type: "POST",
+                url: "/diagram/basicColumnChart/data",
+                data: {dateBegin: dateFrom.getTime(), dateEnd: dateTo.getTime()},
+                dataType: "json",
+                success: function (dataResponse) {
+                    //Вызов отрисовки графика
+                    showBasicColumnChart(dataResponse);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+        }
 //Функция отрисовки графика по полученным данным
         function showBasicColumnChart(dataResponse) {
 
