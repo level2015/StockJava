@@ -22,15 +22,17 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
 
     @PersistenceContext
     private EntityManager entityManager;
-@Autowired
-UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
+
     public DealRepositoryImpl() {
     }
-@Override
-    public List<String> getAllUniqeSymbol(String userEmail){
+
+    @Override
+    public List<String> getAllUniqeSymbol(String userEmail) {
         Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
         Query query = entityManager.createQuery("SELECT DISTINCT d.symbol from Deal d where d.userId=:userID");
-        query.setParameter("userID",userId);
+        query.setParameter("userID", userId);
         List<String> uniqeSymbols = query.getResultList();
         return uniqeSymbols;
     }

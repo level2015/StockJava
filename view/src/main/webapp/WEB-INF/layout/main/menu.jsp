@@ -30,4 +30,8 @@
     <li>
       <a href="#">Меню 5</a>    </li>
   </ul>
+    <form enctype="multipart/form-data" action="/user/dealCreate" method="post">
+        <p><input type="file" name="name">
+            <input type="submit" value="Отправить"></p>
+        </form>
 </div>
