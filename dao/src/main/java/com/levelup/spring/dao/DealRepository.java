@@ -1,9 +1,8 @@
 package com.levelup.spring.dao;
 
 import com.levelup.stock.model.Deal;
-import com.levelup.stock.model.PieChartTest;
+import com.levelup.stock.model.dto.SymbolProfit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface DealRepository {
@@ -18,4 +17,5 @@ public interface DealRepository {
 
     public List<String> getAllUniqeSymbol(String userEmail);
 
+    public List<SymbolProfit> getAllUniqe(String userEmail, Long beginTime, Long endTime);
 }

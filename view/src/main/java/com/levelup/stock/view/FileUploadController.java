@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * Handles requests for the application file upload requests
- */
+* Handles requests for the application file upload requests
+*/
 @Controller
 public class FileUploadController {
 

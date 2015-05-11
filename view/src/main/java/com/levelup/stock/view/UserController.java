@@ -1,12 +1,15 @@
 package com.levelup.stock.view;
 
+//import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxException;
 import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.dao.ParseCSV;
 import com.levelup.spring.dao.impl.DealOpenCSVImpl;
 import com.levelup.spring.service.DealService;
+//import com.levelup.spring.service.DropBoxService;
 import com.levelup.spring.service.DropBoxService;
 import com.levelup.spring.service.UserService;
+//import com.levelup.spring.service.impl.DropBoxServiceImpl;
 import com.levelup.spring.service.impl.DropBoxServiceImpl;
 import com.levelup.stock.model.Deal;
 import com.levelup.stock.model.DropBoxFile;
@@ -132,7 +135,7 @@ public class UserController {
         User user2 = userService.getUserByEmailAndPassword(email, password);
         if (user2 != null) {
             user.setUser(user2);
-            //dealRepository.getAllUniqe("ree@mail.ru",100000L);
+            dealRepository.getAllUniqe(email,100000L,190000000L);
             return "null.page";
         } else {
             return "messageLogin.page";
@@ -214,9 +217,9 @@ public class UserController {
         List<Deal> deals = parseCSV.parse(parseFile.getAbsolutePath());
 
         for (Deal deal : deals) {
-                deal.setUserId(user.getId());
-                dealService.create(deal);
-            }
+            deal.setUserId(user.getId());
+            dealService.create(deal);
+        }
 
         System.out.println(nameFile);
 

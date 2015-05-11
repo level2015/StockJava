@@ -8,7 +8,7 @@ body {background: #FFFFFF url(/css/images/mainPageImages/bg.jpg) fixed repeat-x;
 	background-image: url(/css/images/mainPageImages/header.jpg);
 	background-repeat: no-repeat;
 }
-#content #sidebar { width:222px; float:right;}
+#content #sidebar { width:208px; float:right;}
 #content #left {width:648px; float:left;}
 .clear {clear:both;}
 #footer {background: url(/css/images/mainPageImages/footer.jpg) no-repeat; height:35px; padding-top:25px; text-align:center;}
@@ -34,7 +34,7 @@ a:active {color:#584A30;}
 a:hover {color:#7C5B43; text-decoration:none;}
 
 #content #left p {line-height:20px; margin-bottom:20px;}
-#sidebar .sidebartop {background:url(/css/images/mainPageImages/sidebartop.jpg) no-repeat; height:65px;}
+/*#sidebar .sidebartop {background:url(/css/images/mainPageImages/sidebartop.jpg) no-repeat; height:65px;}*/
 #sidebarcontent {padding:5px 10px 5px 12px;}
 
 #sidebar h2 {background:url(/css/images/mainPageImages/sidebarheading.jpg) no-repeat center bottom; display:block; padding:5px; font-size:18px;}
