@@ -187,7 +187,7 @@ $(document).ready(function () {
                         text: titleOfChart
                     },
                     tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
                     },
                     plotOptions: {
                         pie: {
@@ -195,7 +195,7 @@ $(document).ready(function () {
                             cursor: 'pointer',
                             dataLabels: {
                                 enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                format: '<b>{point.name}</b>: {point.percentage:.2f} %',
                                 style: {
                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                 },

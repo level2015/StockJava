@@ -2,12 +2,12 @@ package com.levelup.stock.model;
 
 public class PieChartTest {
     private String nameOfCurrency;
-    private Float share;
+    private Double share;
 
     public PieChartTest() {
     }
 
-    public PieChartTest(String nameOfCurrency, Float share) {
+    public PieChartTest(String nameOfCurrency, Double share) {
         this.nameOfCurrency = nameOfCurrency;
         this.share = share;
 
@@ -21,11 +21,11 @@ public class PieChartTest {
         this.nameOfCurrency = nameOfCurrency;
     }
 
-    public Float getShare() {
+    public Double getShare() {
         return share;
     }
 
-    public void setShare(Float share) {
+    public void setShare(Double share) {
         this.share = share;
     }
 }

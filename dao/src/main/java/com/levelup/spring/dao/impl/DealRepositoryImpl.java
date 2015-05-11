@@ -44,8 +44,6 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
         Object beginD = new java.sql.Timestamp(beginDate.getTime());
         Object endD = new java.sql.Timestamp(endDate.getTime());
         try {
-
-
             Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
 //        String queryStr="select d.symbol, sum(d.profit) as profitSum from Deal d group by d.symbol";
             //      TypedQuery<SymbolProfit> query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime>:param and d.userId=:userID group by d.symbol", SymbolProfit.class);
@@ -56,11 +54,6 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
 //        List<SymbolProfit> queryResultList = query.getResultList();
             List<Object[]> queryResultList = query.getResultList();
 
-            System.out.println(beginD);
-            System.out.println(endD);
-            System.out.println(userId);
-            System.out.println(queryResultList.size());
-
             List<SymbolProfit> listSymbolProfits = new ArrayList<>();
 
             for (Object[] result : queryResultList) {
@@ -69,16 +62,6 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
                 symbolProfit.setProfit(Double.parseDouble(result[1].toString()));
                 listSymbolProfits.add(symbolProfit);
             }
-//PieChartTest p = new PieChartTest();
-//        p = (PieChartTest) uniqeSymbols.get(0);
-//        System.out.println(p.getNameOfCurrency());
-
-
-//       HashMap myMap = new HashMap();
-//        myMap.putAll((Map) uniqeSymbols);
-//        System.out.println(myMap.get("EURCHF"));
-//        uniqeSymbols.get(0);
-            // System.out.println(uniqeSymbols.get(0));
             return listSymbolProfits;
         } catch (Exception e) {
             System.err.println(e.getMessage());

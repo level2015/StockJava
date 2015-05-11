@@ -1,21 +1,23 @@
 package com.levelup.stock.view;
 
+import com.levelup.spring.service.DealService;
 import com.levelup.stock.model.BasicColumnChart;
 import com.levelup.stock.model.PieChartTest;
+import com.levelup.stock.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/diagram")
+@SessionAttributes("user")
 public class DiagramController {
-
+@Autowired
+    DealService dealService;
     //    О диаграммах
     @RequestMapping(value ="/about", method = RequestMethod.GET)
     public String viewAboutCharts(Model model) {
@@ -29,14 +31,14 @@ public class DiagramController {
     }
 
     @RequestMapping(value ="/pieChart/data", produces = "application/json", method = RequestMethod.POST)
-    public @ResponseBody List<PieChartTest> getDataListForPieChart(@RequestParam("dateBegin") Long dateFrom,
+    public @ResponseBody List<PieChartTest> getDataListForPieChart(@ModelAttribute("user") User user, @RequestParam("dateBegin") Long dateFrom,
                                                         @RequestParam("dateEnd") Long dateTo) {
-        List<PieChartTest> dataList = new ArrayList<PieChartTest>();
-        dataList.add(new PieChartTest("McDonald's", 30.5f));
-        dataList.add(new PieChartTest("King Burger", 25.5f));
-        dataList.add(new PieChartTest("Fufelok", 40.5f));
-        dataList.add(new PieChartTest("Others", 3.5f));
-        return dataList;
+//        List<PieChartTest> dataList = new ArrayList<PieChartTest>();
+//        dataList.add(new PieChartTest("McDonald's", 30.5));
+//        dataList.add(new PieChartTest("King Burger", 25.5));
+//        dataList.add(new PieChartTest("Fufelok", 40.5));
+//        dataList.add(new PieChartTest("Others", 3.5));
+        return dealService.getAllUniqe(user.getEmail(), dateFrom, dateTo);
     }
 
     //    Столбчатая диаграмма и передача данных для ее отрисовки
