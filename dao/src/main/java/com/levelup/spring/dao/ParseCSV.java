@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * Created by SMULL on 5/4/2015.
  */
-public interface ParseJacksonCSV {
+public interface ParseCSV {
     List<Deal> parse(String fileName);
 }

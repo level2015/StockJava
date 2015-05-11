@@ -4,6 +4,7 @@ import com.levelup.spring.dao.AbstractRepository;
 import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.dao.UserRepository;
 import com.levelup.stock.model.Deal;
+import com.levelup.stock.model.PieChartTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Repository("dealRepository")
 @Transactional
@@ -36,5 +34,6 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
         List<String> uniqeSymbols = query.getResultList();
         return uniqeSymbols;
     }
+
 
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.levelup.spring.dao.ParseJacksonCSV;
+import com.levelup.spring.dao.ParseCSV;
 import com.levelup.stock.model.Deal;
 
 import java.io.File;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 //JACKSON не получается указать конкретный тип данных
 //CsvSchema.ColumnType.NUMBER
-public class DealJacksonCSVImpl implements ParseJacksonCSV {
+public class DealJacksonCSVImpl implements ParseCSV {
 
 
     @Override

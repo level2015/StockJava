@@ -20,6 +20,9 @@
 </head>
 <body>
 
+        <div id="dialog_window_1" class="dialog_window" title="Announcement" style="display: none" >
+            <p>File is downloaded</p>
+        </div>
         <%--<c:out value="${authorizeUrl}"></c:out>--%>
         <h2 style="margin-left: 20px">List of DropBox Files</h2>
         <table class="bordered">
@@ -40,6 +43,8 @@
                 </c:forEach>
             </tbody>
         </table>
+
+
 
          <%--<c:if test="${not empty authorizeUrl}"> src="${authorizeUrl}"></c:if>/>...</iframe>--%>
 </body>

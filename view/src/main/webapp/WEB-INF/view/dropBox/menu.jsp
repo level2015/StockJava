@@ -21,9 +21,15 @@
         <a href="#">Меню 2</a>    </li>
     <li>
         <a href="#">Меню 3</a>    </li>
+
 </ul>
-    <input type="button" id="uploadFileDropBox" value="Upload">
-    <input type="button" id="createFolderDropBox" value="Create folder">
+    <div>
+        <input type="button" id="uploadFileDropBox" value="Upload" style="margin-left: 20px">
+    </div>
+    <div>
+        <input type="button" id="createFolderDropBox" value="Create folder" style="margin-left: 20px">
+    </div>
+
 
 </body>
 </html>

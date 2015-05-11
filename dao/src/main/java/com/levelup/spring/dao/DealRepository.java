@@ -1,6 +1,7 @@
 package com.levelup.spring.dao;
 
 import com.levelup.stock.model.Deal;
+import com.levelup.stock.model.PieChartTest;
 
 import java.util.ArrayList;
 import java.util.List;

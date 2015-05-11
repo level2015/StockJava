@@ -1,15 +1,12 @@
 package com.levelup.spring.dao.impl;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.levelup.spring.dao.ParseJacksonCSV;
+import com.levelup.spring.dao.ParseCSV;
 import com.levelup.stock.model.Deal;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +14,7 @@ import java.util.List;
 /**
  * Created by SMULL on 5/4/2015.
  */
-public class DealOpenCSVImpl implements ParseJacksonCSV {
+public class DealOpenCSVImpl implements ParseCSV {
 
     @Override
     public List<Deal> parse(String fileName) {

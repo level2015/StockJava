@@ -1,10 +1,8 @@
 package com.levelup.stock.view;
 
-import Pars.ParseCSVImpl;
 import com.dropbox.core.DbxException;
 import com.levelup.spring.dao.DealRepository;
-import com.levelup.spring.dao.ParseJacksonCSV;
-import com.levelup.spring.dao.UserRepository;
+import com.levelup.spring.dao.ParseCSV;
 import com.levelup.spring.dao.impl.DealOpenCSVImpl;
 import com.levelup.spring.service.DealService;
 import com.levelup.spring.service.DropBoxService;
@@ -17,21 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
+import java.io.*;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/user")
@@ -43,6 +31,9 @@ public class UserController {
 
     @Autowired
     DealService dealService;
+
+    @Autowired
+    DealRepository dealRepository;
 
     private static DropBoxService dropBoxService = new DropBoxServiceImpl();
 
@@ -141,6 +132,7 @@ public class UserController {
         User user2 = userService.getUserByEmailAndPassword(email, password);
         if (user2 != null) {
             user.setUser(user2);
+            //dealRepository.getAllUniqe("ree@mail.ru",100000L);
             return "null.page";
         } else {
             return "messageLogin.page";
@@ -152,8 +144,8 @@ public class UserController {
         //System.out.println("sasasa");
         List<DropBoxFile> dropBoxFileList;
         dropBoxService.getAuth();
-        model.addAttribute("authorizeUrl", dropBoxService.getAuthorizeUrl(dropBoxService.getAppKey()
-                , dropBoxService.getAppSecret()));
+//        model.addAttribute("authorizeUrl", dropBoxService.getAuthorizeUrl(dropBoxService.getAppKey()
+//                , dropBoxService.getAppSecret()));
         try {
             dropBoxFileList = dropBoxService.listDropboxFolders("/");
             model.addAttribute("dropBox", dropBoxFileList);
@@ -180,5 +172,56 @@ public class UserController {
         return "main.page";
     }
 
+
+
+    @RequestMapping(value = "/parse", method = RequestMethod.GET)
+    public String parseFile(Model model){
+
+        String rootPath = System.getProperty("catalina.home");
+        File pathName = new File(rootPath + File.separator + "tmpFiles");
+//        if (!dir.exists())
+//            dir.mkdirs();
+        String[] serverFiles = pathName.list();
+        model.addAttribute("serverFiles",serverFiles);
+//        for (int i = 0; i < fileNames.length; i++)
+//        {
+//            File f = new File (pathName.getPath(),fileNames[i]);
+//            if (f.isDirectory())
+//            {
+//                try {
+//                    System.out.println (f.getCanonicalPath());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }
+
+//          return "";
+        return "parse.page";
+    }
+
+    @RequestMapping(value = "/dealCreate", method = RequestMethod.POST)
+    public String dealCreate(@RequestParam String nameFile,
+                             @ModelAttribute("user") User user) {
+
+        String rootPath = System.getProperty("catalina.home");
+        File pathName = new File(rootPath + File.separator + "tmpFiles");
+
+        File parseFile = new File(pathName.getAbsolutePath()
+                + File.separator + nameFile);
+        ParseCSV parseCSV = new DealOpenCSVImpl();
+        List<Deal> deals = parseCSV.parse(parseFile.getAbsolutePath());
+
+        for (Deal deal : deals) {
+                deal.setUserId(user.getId());
+                dealService.create(deal);
+            }
+
+        System.out.println(nameFile);
+
+
+        return "";
+    }
 
 }

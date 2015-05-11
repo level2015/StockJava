@@ -19,6 +19,7 @@ $(document).ready(function () {
                  success: function (data) {
                  }
              });
+            $('#dialog_window_1').dialog();
         });
     });
 
