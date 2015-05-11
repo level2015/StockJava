@@ -6,5 +6,6 @@
     <definition name="charts.page" extends="main.page">
         <put-attribute name="main.title" value="Charts" />
         <put-attribute name="main.content" value="/WEB-INF/view/charts/about/charts.jsp" />
+
     </definition>
 </tiles-definitions>

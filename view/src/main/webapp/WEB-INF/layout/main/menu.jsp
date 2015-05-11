@@ -6,7 +6,7 @@
   <h2>Меню пользователя</h2>
   <ul>
     <li>
-      <a href="#">Исходные данные</a>    </li>
+      <a href="#">Исходные файлы</a>    </li>
     <li>
       <a href="/diagram/about">Диаграммы</a>    </li>
     <li>
@@ -20,7 +20,7 @@
   <h2>Меню администратора</h2>
   <ul>
     <li>
-      <a href="#">Меню 1</a>    </li>
+      <a href="/user/dropBox">DropBox</a>    </li>
     <li>
       <a href="#">Меню 2</a>    </li>
     <li>
@@ -33,5 +33,5 @@
     <form enctype="multipart/form-data" action="/user/dealCreate" method="post">
         <p><input type="file" name="name">
             <input type="submit" value="Отправить"></p>
-        </form>
+    </form>
 </div>

@@ -1,24 +1,30 @@
 package com.levelup.stock.view;
 
 import Pars.ParseCSVImpl;
+import com.dropbox.core.DbxException;
 import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.dao.ParseJacksonCSV;
 import com.levelup.spring.dao.UserRepository;
 import com.levelup.spring.dao.impl.DealOpenCSVImpl;
 import com.levelup.spring.service.DealService;
+import com.levelup.spring.service.DropBoxService;
 import com.levelup.spring.service.UserService;
+import com.levelup.spring.service.impl.DropBoxServiceImpl;
 import com.levelup.stock.model.Deal;
+import com.levelup.stock.model.DropBoxFile;
 import com.levelup.stock.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +43,8 @@ public class UserController {
 
     @Autowired
     DealService dealService;
+
+    private static DropBoxService dropBoxService = new DropBoxServiceImpl();
 
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
@@ -123,7 +131,7 @@ public class UserController {
             return "null.page";
         }
     }
-   
+
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String signInUser(Model model, @ModelAttribute("user") User user,
@@ -138,4 +146,39 @@ public class UserController {
             return "messageLogin.page";
         }
     }
+
+    @RequestMapping(value = "/dropBox", method = RequestMethod.GET)
+    public String getDropBoxFiles(Model model) {
+        //System.out.println("sasasa");
+        List<DropBoxFile> dropBoxFileList;
+        dropBoxService.getAuth();
+        model.addAttribute("authorizeUrl", dropBoxService.getAuthorizeUrl(dropBoxService.getAppKey()
+                , dropBoxService.getAppSecret()));
+        try {
+            dropBoxFileList = dropBoxService.listDropboxFolders("/");
+            model.addAttribute("dropBox", dropBoxFileList);
+        } catch (DbxException e) {
+            e.printStackTrace();
+        }
+        return "dropBox.page";
+    }
+
+
+    @RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
+    public String downloadFileFromDropBox(@RequestParam String nameFile)  {
+
+//        System.out.println("sasasa");
+//        System.out.println(nameFile);
+        try {
+            dropBoxService.downloadFromDropbox(nameFile);
+        } catch (DbxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "main.page";
+    }
+
+
 }
