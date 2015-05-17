@@ -1,6 +1,6 @@
 package com.levelup.stock.view;
 
-import com.levelup.spring.service.DealService;
+import com.levelup.spring.service.ChartsService;
 import com.levelup.stock.model.BasicColumnChart;
 import com.levelup.stock.model.PieChartTest;
 import com.levelup.stock.model.User;
@@ -17,7 +17,9 @@ import java.util.List;
 @SessionAttributes("user")
 public class DiagramController {
 @Autowired
-    DealService dealService;
+//    DealService dealService;
+    ChartsService chartsService;
+
     //    О диаграммах
     @RequestMapping(value ="/about", method = RequestMethod.GET)
     public String viewAboutCharts(Model model) {
@@ -38,7 +40,8 @@ public class DiagramController {
 //        dataList.add(new PieChartTest("King Burger", 25.5));
 //        dataList.add(new PieChartTest("Fufelok", 40.5));
 //        dataList.add(new PieChartTest("Others", 3.5));
-        return dealService.getAllUniqe(user.getEmail(), dateFrom, dateTo);
+//        return dealService.getAllUniqe(user.getEmail(), dateFrom, dateTo);
+        return chartsService.getPieChartValidData(user.getId(), dateFrom, dateTo);
     }
 
     //    Столбчатая диаграмма и передача данных для ее отрисовки

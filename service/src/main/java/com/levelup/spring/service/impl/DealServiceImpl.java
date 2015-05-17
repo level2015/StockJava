@@ -1,6 +1,7 @@
 package com.levelup.spring.service.impl;
 
 
+import com.levelup.spring.dao.ChartsRepository;
 import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.service.DealService;
 import com.levelup.stock.model.Deal;
@@ -17,6 +18,7 @@ public class DealServiceImpl implements DealService {
 
     @Autowired
     DealRepository dealRepository;
+    ChartsRepository chartsRepository;
 
     public DealServiceImpl() {
     }
@@ -50,7 +52,7 @@ public class DealServiceImpl implements DealService {
     public List<PieChartTest> getAllUniqe(String userEmail, Long beginTime, Long endTime) {
         List<SymbolProfit> list = (ArrayList) dealRepository.getAllUniqe(userEmail, beginTime, endTime);
         List<PieChartTest> pieChartTestList = new ArrayList<PieChartTest>();
-        int count =0;
+        int count = 0;
         double sum = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getProfit() < 0) {
@@ -67,5 +69,6 @@ public class DealServiceImpl implements DealService {
             }
         }
         return pieChartTestList;
+
     }
 }
