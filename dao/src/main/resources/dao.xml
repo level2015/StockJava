@@ -17,7 +17,7 @@
           class="org.springframework.jdbc.datasource.DriverManagerDataSource" p:driverClassName="${db.driver.className}"
           p:url="${db.url}" p:username="${db.username}" p:password="${db.password}">
     </bean>
-
+    <!--Можно использовать данный бин если не хочется делать сеттер dataSource для jdbcTemplate -->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="dataSource"></bean>
 
 </beans>

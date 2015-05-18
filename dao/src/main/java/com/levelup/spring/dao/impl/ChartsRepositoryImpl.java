@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -16,12 +15,14 @@ import java.util.List;
 @Repository
 public class ChartsRepositoryImpl implements ChartsRepository {
 
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private JdbcTemplate jdbcTemplate;
+    //Рекомендуемый способ создания jdbcTemplate по документации Spring.
+//    Можно не использовать если в файле конфигурации создать бин на jdbcTemplate
+//    @Autowired
+//    public void setDataSource(DataSource dataSource) {
+//        this.jdbcTemplate = new JdbcTemplate(dataSource);
+//    }
 
     @Override
     public List<PieChartData> getDataForPieChart(Long id, Long beginTime, Long endTime) {
