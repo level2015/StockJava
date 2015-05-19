@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/diagram")
@@ -75,6 +76,25 @@ public class DiagramController {
         return dataList;
     }
 
+    @RequestMapping(value ="/basicLineChart", method = RequestMethod.GET)
+    public String viewBasicLine(Model model) {
+        return "basicLineChart.page";
+    }
+
+    @RequestMapping(value ="/basicLineChart/data", produces = "application/json", method = RequestMethod.POST)
+    public @ResponseBody List<Double> getDataListForBasicLine() {
+
+        List<Double> dataList = new ArrayList<>();
+        Random r = new Random();
+        double rangeMin = 400;
+        double rangeMax = 1000;
+
+        for(int i = 0; i < 100; i++) {
+            double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+            dataList.add(randomValue);
+        }
+        return dataList;
+    }
 
 
 }

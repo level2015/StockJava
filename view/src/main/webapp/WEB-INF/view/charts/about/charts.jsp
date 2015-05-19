@@ -5,7 +5,7 @@
       <li class="activetab"><a href="/diagram/about">О диаграммах</a></li>
       <li><a href="/diagram/pieChart">Круговая диаграмма</a></li>
       <li><a href="/diagram/basicColumnChart">Столбчатая диаграмма</a></li>
-      <li><a href="#">Chart2</a></li>
+      <li><a href="/diagram/basicLineChart">График</a></li>
       <li><a href="#">Chart3</a></li>
     </ul>
   </div>

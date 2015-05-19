@@ -19,7 +19,7 @@ $(document).ready(function () {
         });
     });
 //Действие по нажатию кнопки "показать"
-    $("#showButtonPC").click(function () {
+    $("#showButtonPCPie").click(function () {
 
         var dateFrom = $("#from").datepicker("getDate");
         var dateTo = $("#to").datepicker("getDate");
