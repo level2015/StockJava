@@ -38,7 +38,8 @@ public class UserController {
     @Autowired
     DealRepository dealRepository;
 
-    private static DropBoxService dropBoxService = new DropBoxServiceImpl();
+    @Autowired
+    DropBoxService dropBoxService = new DropBoxServiceImpl();
 
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)

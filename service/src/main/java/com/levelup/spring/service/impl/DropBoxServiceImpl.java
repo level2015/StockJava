@@ -3,6 +3,7 @@ package com.levelup.spring.service.impl;
 import com.dropbox.core.*;
 import com.levelup.spring.service.DropBoxService;
 import com.levelup.stock.model.DropBoxFile;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,16 +16,17 @@ import java.util.Locale;
 /**
 * Created by SMULL on 5/10/2015.
 */
+@Service("dropBoxService")
 public class DropBoxServiceImpl implements DropBoxService {
 
-    private static final String APP_KEY = "62j03uwvzcaeuki";
-    private static final String APP_SECRET = "9kve9350fznnpl1";
+    public static final String APP_KEY = "62j03uwvzcaeuki";
+    public static final String APP_SECRET = "9kve9350fznnpl1";
     private DbxClient dbxClient;
 
     private DbxWebAuthNoRedirect dbxWebAuthNoRedirect;
     private DbxRequestConfig dbxRequestConfig;
 
-    private static final String accessToken = "PldL4uPQH8AAAAAAAAAAOE6l9kY80tvZPPXb1Am7WdIOEBLfzZVRpyAdioy7w6m9";
+    public static final String accessToken = "PldL4uPQH8AAAAAAAAAAOE6l9kY80tvZPPXb1Am7WdIOEBLfzZVRpyAdioy7w6m9";
 
 
     public String getAppKey() {
