@@ -5,12 +5,12 @@ import java.util.List;
 
 public class BasicColumnChart {
     private String name;
-    private List<Integer> data;
+    private List<Double> data;
 
     public BasicColumnChart() {
     }
 
-    public BasicColumnChart(String name, List<Integer> data) {
+    public BasicColumnChart(String name, List<Double> data) {
         this.name = name;
         this.data = data;
     }
@@ -23,7 +23,7 @@ public class BasicColumnChart {
         this.name = name;
     }
 
-    public List<Integer> getData() {
+    public List<Double> getData() {
         return data;
     }
 

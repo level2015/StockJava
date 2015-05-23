@@ -55,19 +55,19 @@ public class DiagramController {
     public @ResponseBody List<BasicColumnChart> getDataListForBasicColumn(@RequestParam("dateBegin") Long dateBegin,
                                                         @RequestParam("dateEnd") Long dateEnd) {
         List<BasicColumnChart> dataList = new ArrayList<BasicColumnChart>();
-        List<Integer> dataForChart = new ArrayList();
-        dataForChart.add(10);
-        dataForChart.add(12);
-        dataForChart.add(16);
-        dataForChart.add(18);
-        dataForChart.add(14);
-        dataForChart.add(40);
-        dataForChart.add(70);
-        dataForChart.add(20);
-        dataForChart.add(30);
-        dataForChart.add(90);
-        dataForChart.add(100);
-        dataForChart.add(15);
+        List<Double> dataForChart = new ArrayList();
+        dataForChart.add(10D);
+        dataForChart.add(12D);
+        dataForChart.add(16D);
+        dataForChart.add(18D);
+        dataForChart.add(14D);
+        dataForChart.add(40D);
+        dataForChart.add((double) 70);
+        dataForChart.add(20D);
+        dataForChart.add(30D);
+        dataForChart.add(90D);
+        dataForChart.add(100D);
+        dataForChart.add(15D);
 
         dataList.add(new BasicColumnChart("McDonald's", dataForChart));
         dataList.add(new BasicColumnChart("King Burger", dataForChart));
@@ -96,5 +96,32 @@ public class DiagramController {
         return dataList;
     }
 
+    @RequestMapping(value ="/basicBarChart", method = RequestMethod.GET)
+    public String viewBasicBar(Model model) {
+        return "basicBarChart.page";
+    }
 
-}
+    @RequestMapping(value ="/basicBarChart/data", produces = "application/json", method = RequestMethod.POST)
+    public @ResponseBody List<BasicColumnChart> getDataListForBarColumn(@RequestParam("dateBegin") Long dateBegin,
+                                                                          @RequestParam("dateEnd") Long dateEnd) {
+        List<BasicColumnChart> dataList = new ArrayList<BasicColumnChart>();
+        List<Double> dataForChart = new ArrayList();
+        dataForChart.add(10D);
+        dataForChart.add(12D);
+        dataForChart.add(16D);
+        dataForChart.add(18D);
+        dataForChart.add(14D);
+        dataForChart.add(40D);
+        dataForChart.add((double) 70);
+        dataForChart.add(20D);
+        dataForChart.add(30D);
+        dataForChart.add(90D);
+        dataForChart.add(100D);
+        dataForChart.add(15D);
+
+        dataList.add(new BasicColumnChart("McDonald's", dataForChart));
+        dataList.add(new BasicColumnChart("King Burger", dataForChart));
+        dataList.add(new BasicColumnChart("Fufelok", dataForChart));
+        dataList.add(new BasicColumnChart("Others", dataForChart));
+        return dataList;
+    }}
