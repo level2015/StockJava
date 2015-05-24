@@ -1,5 +1,6 @@
 package com.levelup.stock.view;
 
+import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.service.ChartsService;
 import com.levelup.stock.model.BasicColumnChart;
 import com.levelup.stock.model.PieChartTest;
@@ -20,7 +21,8 @@ public class DiagramController {
 @Autowired
 //    DealService dealService;
     ChartsService chartsService;
-
+    @Autowired
+    DealRepository dealRepository;
     //    О диаграммах
     @RequestMapping(value ="/about", method = RequestMethod.GET)
     public String viewAboutCharts(Model model) {
@@ -102,7 +104,8 @@ public class DiagramController {
     }
 
     @RequestMapping(value ="/basicBarChart/data", produces = "application/json", method = RequestMethod.POST)
-    public @ResponseBody List<BasicColumnChart> getDataListForBarColumn(@RequestParam("dateBegin") Long dateBegin,
+    public @ResponseBody List<BasicColumnChart> getDataListForBarColumn(@ModelAttribute("user") User user,
+                                                                        @RequestParam("dateBegin") Long dateBegin,
                                                                           @RequestParam("dateEnd") Long dateEnd) {
         List<BasicColumnChart> dataList = new ArrayList<BasicColumnChart>();
         List<Double> dataForChart = new ArrayList();
@@ -123,5 +126,6 @@ public class DiagramController {
         dataList.add(new BasicColumnChart("King Burger", dataForChart));
         dataList.add(new BasicColumnChart("Fufelok", dataForChart));
         dataList.add(new BasicColumnChart("Others", dataForChart));
-        return dataList;
+        return dealRepository.getSumProfit(user.getEmail(), dateBegin, dateEnd);
+        //return dataList;
     }}

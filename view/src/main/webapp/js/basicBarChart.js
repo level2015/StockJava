@@ -48,21 +48,15 @@ $(document).ready(function () {
                     type: 'column'
                 },
                 title: {
-                    text: 'Column chart with negative values'
+                    text: 'Сумма профитов по годам'
                 },
                 xAxis: {
-                    categories: ['CHFUSD', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                    categories: ['2009', '2010', 'Pears', 'Grapes', 'Bananas']
                 },
                 credits: {
                     enabled: false
                 },
-                series: [{
-                    name: '2008',
-                    data: [5, 3, 4, 7, 2]
-                }, {
-                    name: '2009',
-                    data: [2, -2, -3, 2, 1]
-                }]
+                series: dataResponse
             });
         }
     });

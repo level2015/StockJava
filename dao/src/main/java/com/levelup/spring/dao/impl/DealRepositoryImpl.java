@@ -79,7 +79,7 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
             Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
 //        String queryStr="select d.symbol, sum(d.profit) as profitSum from Deal d group by d.symbol";
             //      TypedQuery<SymbolProfit> query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime>:param and d.userId=:userID group by d.symbol", SymbolProfit.class);
-            Query query = entityManager.createQuery("select Year(closeTime),d.symbol, sum(d.profit) as profitSum from Deal d where year(d.closeTime) Between:beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol");
+            Query query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime Between:beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol");
             query.setParameter("userID", userId);
             query.setParameter("beginD", beginD);
             query.setParameter("endD", endD);
@@ -87,23 +87,43 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
             List<Object[]> queryResultList = query.getResultList();
 
             List<BasicColumnChart> listBasicColumnChart = new ArrayList<>();
-            ArrayList<Double> listDoubleData = new ArrayList<>();
 
+            BasicColumnChart basicColumnChart = new BasicColumnChart();
+            int count =-1;
+            boolean flag = false;
             for (int i = 0; i < queryResultList.size(); i++) {
-                BasicColumnChart basicColumnChart = new BasicColumnChart();
+                ArrayList<Double> listDoubleData = new ArrayList<>();
                 Object[] temp = queryResultList.get(i);
-                Object[] temp2 = {};
+                Object[] temp2 = {null,null};
                 if (i > 0) {
                     temp2 = queryResultList.get(i - 1);
                 }
-                if (temp[0].equals(temp2[0])) {
-                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                    basicColumnChart.setData(listDoubleData);
+
+                for(int j=0; j<listBasicColumnChart.size(); j++){
+
+                    if(temp[0].equals(listBasicColumnChart.get(j).getName())){
+                        listDoubleData.addAll(listBasicColumnChart.get(j).getData());
+                        listDoubleData.add(Double.parseDouble(temp[1].toString()));
+                        listBasicColumnChart.get(j).setData(listDoubleData);
+                        flag=true;
+                        break;
+                    };
+                }
+
+                if (flag) {
+                    continue;
+//                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
+//                    basicColumnChart.setData(listDoubleData);
+//                    listBasicColumnChart.remove(count);
+//                    listBasicColumnChart.add(basicColumnChart);
                 } else {
                     listDoubleData = new ArrayList<>();
+                    basicColumnChart = new BasicColumnChart();
                     basicColumnChart.setNameOfCurrency(temp[0].toString());
                     listDoubleData.add(Double.parseDouble(temp[1].toString()));
                     basicColumnChart.setData(listDoubleData);
+                    listBasicColumnChart.add(basicColumnChart);
+                    count++;
                 }
 
 
