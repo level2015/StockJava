@@ -25,11 +25,11 @@ $(document).ready(function () {
         if ((dateFrom === null) || (dateTo === null)) {
             alert("Не все даты указаны! Пожалуйста, проверьте еще раз.");
         } else {
-
+            if($("#statByYears").prop("checked")){
 //Запрос к серверу на получение данных по клику по кнопке
             $.ajax({
                 type: "POST",
-                url: "/diagram/basicBarChart/data",
+                url: "/diagram/basicBarChart/statByYears",
                 data: {dateBegin: dateFrom.getTime(), dateEnd: dateTo.getTime()},
                 dataType: "json",
                 success: function (dataResponse) {
@@ -39,19 +39,40 @@ $(document).ready(function () {
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(textStatus);
                 }
-            });
+            });}
+            if($("#statByMonths").prop("checked")){
+                $.ajax({
+                type: "POST",
+                url: "/diagram/basicBarChart/statByMonths",
+                data: {dateBegin: dateFrom.getTime(), dateEnd: dateTo.getTime()},
+                dataType: "json",
+                success: function (dataResponse) {
+                    //Вызов отрисовки графика
+                    showBarChart(dataResponse);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });}
         }
 //Функция отрисовки графика по полученным данным
         function showBarChart(dataResponse) {
+
             $('#container').highcharts({
+
                 chart: {
                     type: 'column'
                 },
                 title: {
-                    text: 'Сумма профитов по годам'
+                    text: 'Сумма профитов'
                 },
                 xAxis: {
-                    categories: ['2009', '2010', 'Pears', 'Grapes', 'Bananas']
+                    categories: dataResponse[0].year
+                },
+                yAxis: {
+                    title: {
+                        text: 'Profit ($)'
+                    }
                 },
                 credits: {
                     enabled: false

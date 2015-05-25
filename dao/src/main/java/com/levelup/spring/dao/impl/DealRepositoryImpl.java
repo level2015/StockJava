@@ -3,7 +3,7 @@ package com.levelup.spring.dao.impl;
 import com.levelup.spring.dao.AbstractRepository;
 import com.levelup.spring.dao.DealRepository;
 import com.levelup.spring.dao.UserRepository;
-import com.levelup.stock.model.BasicColumnChart;
+import com.levelup.stock.model.dto.BasicBarChart;
 import com.levelup.stock.model.Deal;
 import com.levelup.stock.model.dto.SymbolProfit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,64 +71,107 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
     }
 
     @Override
-    public List<BasicColumnChart> getSumProfit(String userEmail, Long beginTime, Long endTime) {
-
+    public List<BasicBarChart> getSumProfit(String userEmail, Long beginTime, Long endTime) {
+        try {
         Object beginD = new java.sql.Timestamp(beginTime);
         Object endD = new java.sql.Timestamp(endTime);
-        try {
+
             Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
-//        String queryStr="select d.symbol, sum(d.profit) as profitSum from Deal d group by d.symbol";
-            //      TypedQuery<SymbolProfit> query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime>:param and d.userId=:userID group by d.symbol", SymbolProfit.class);
-            Query query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime Between:beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol");
+            Query query = entityManager.createQuery("select d.symbol, round(sum(d.profit),2) as profitSum, Year(d.closeTime)  from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol");
+
             query.setParameter("userID", userId);
             query.setParameter("beginD", beginD);
             query.setParameter("endD", endD);
-//        List<SymbolProfit> queryResultList = query.getResultList();
+
             List<Object[]> queryResultList = query.getResultList();
-
-            List<BasicColumnChart> listBasicColumnChart = new ArrayList<>();
-
-            BasicColumnChart basicColumnChart = new BasicColumnChart();
-            int count =-1;
+            List<BasicBarChart> listBasicBarChart = new ArrayList<>();
+            Set<String> years = new TreeSet<>();
             boolean flag = false;
+
             for (int i = 0; i < queryResultList.size(); i++) {
                 ArrayList<Double> listDoubleData = new ArrayList<>();
                 Object[] temp = queryResultList.get(i);
-                Object[] temp2 = {null,null};
-                if (i > 0) {
-                    temp2 = queryResultList.get(i - 1);
-                }
 
-                for(int j=0; j<listBasicColumnChart.size(); j++){
-
-                    if(temp[0].equals(listBasicColumnChart.get(j).getName())){
-                        listDoubleData.addAll(listBasicColumnChart.get(j).getData());
+                for (int j = 0; j < listBasicBarChart.size(); j++) {
+                    if (temp[0].equals(listBasicBarChart.get(j).getName())) {
+                        listDoubleData.addAll(listBasicBarChart.get(j).getData());
                         listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                        listBasicColumnChart.get(j).setData(listDoubleData);
-                        flag=true;
+                        listBasicBarChart.get(j).setData(listDoubleData);
+                        years.add(temp[2].toString());
+                        listBasicBarChart.get(j).setYear(years);
+                        flag = true;
                         break;
-                    };
+                    }
                 }
-
                 if (flag) {
                     continue;
-//                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
-//                    basicColumnChart.setData(listDoubleData);
-//                    listBasicColumnChart.remove(count);
-//                    listBasicColumnChart.add(basicColumnChart);
                 } else {
                     listDoubleData = new ArrayList<>();
-                    basicColumnChart = new BasicColumnChart();
-                    basicColumnChart.setNameOfCurrency(temp[0].toString());
+                    BasicBarChart basicBarChart = new BasicBarChart();
+                    basicBarChart.setName(temp[0].toString());
                     listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                    basicColumnChart.setData(listDoubleData);
-                    listBasicColumnChart.add(basicColumnChart);
-                    count++;
+                    basicBarChart.setData(listDoubleData);
+                    years.add(temp[2].toString());
+                    basicBarChart.setYear(years);
+                    listBasicBarChart.add(basicBarChart);
                 }
-
-
             }
-            return listBasicColumnChart;
+            return listBasicBarChart;
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+@Override
+    public List<BasicBarChart> getSumProf(String userEmail, Long beginTime, Long endTime) {
+        try {
+            Object beginD = new java.sql.Timestamp(beginTime);
+            Object endD = new java.sql.Timestamp(endTime);
+
+            Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
+            Query query = entityManager.createQuery("select d.symbol, round(sum(d.profit),2) as profitSum, date_format(d.closeTime, '20%y/%m') as da from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%m'), d.symbol Order by date_format(closeTime, '%y %m') asc");
+
+            query.setParameter("userID", userId);
+            query.setParameter("beginD", beginD);
+            query.setParameter("endD", endD);
+
+            List<Object[]> queryResultList = query.getResultList();
+            List<BasicBarChart> listBasicBarChart = new ArrayList<>();
+            Set<String> years = new TreeSet<>();
+            boolean flag = false;
+
+            for (int i = 0; i < queryResultList.size(); i++) {
+                ArrayList<Double> listDoubleData = new ArrayList<>();
+                Object[] temp = queryResultList.get(i);
+
+                for (int j = 0; j < listBasicBarChart.size(); j++) {
+                    if (temp[0].equals(listBasicBarChart.get(j).getName())) {
+                        listDoubleData.addAll(listBasicBarChart.get(j).getData());
+                        listDoubleData.add(Double.parseDouble(temp[1].toString()));
+                        listBasicBarChart.get(j).setData(listDoubleData);
+                        years.add(temp[2].toString());
+                        listBasicBarChart.get(j).setYear(years);
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {
+                    continue;
+                } else {
+                    listDoubleData = new ArrayList<>();
+                    BasicBarChart basicBarChart = new BasicBarChart();
+                    basicBarChart.setName(temp[0].toString());
+                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
+                    basicBarChart.setData(listDoubleData);
+                    years.add(temp[2].toString());
+                    basicBarChart.setYear(years);
+                    listBasicBarChart.add(basicBarChart);
+                }
+            }
+            return listBasicBarChart;
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

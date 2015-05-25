@@ -2,6 +2,7 @@ package com.levelup.spring.dao;
 
 import com.levelup.stock.model.BasicColumnChart;
 import com.levelup.stock.model.Deal;
+import com.levelup.stock.model.dto.BasicBarChart;
 import com.levelup.stock.model.dto.SymbolProfit;
 
 import java.util.List;
@@ -20,5 +21,7 @@ public interface DealRepository {
 
     public List<SymbolProfit> getAllUniqe(String userEmail, Long beginTime, Long endTime);
 
-    public List<BasicColumnChart> getSumProfit(String userEmail, Long beginTime, Long endTime);
+    public List<BasicBarChart> getSumProfit(String userEmail, Long beginTime, Long endTime);
+
+    public List<BasicBarChart> getSumProf(String userEmail, Long beginTime, Long endTime);
 }

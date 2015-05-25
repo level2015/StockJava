@@ -20,8 +20,9 @@
     <label for="to">по:</label>
     <input type="text" id="to" name="to">
     <input id="showButtonBC" type="button" value="Показать">
-    <p>         </p>
-      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <p>Статистика по годам   <input id="statByYears" name="stat" type="radio" checked ></br>
+      Статистика по месяцам <input  id="statByMonths" name="stat" type="radio"  ></br> </p>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   </div>
 </div>
