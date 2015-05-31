@@ -22,6 +22,8 @@
         <input type="text" id="to" name="to">
         <input id="showButtonBCLine" type="button" value="Показать">
         <p>         </p>
+        <div id="checkBox"></div>
+        <p>         </p>
         <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
 </div>

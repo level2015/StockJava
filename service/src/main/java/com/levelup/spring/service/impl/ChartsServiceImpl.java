@@ -3,6 +3,7 @@ package com.levelup.spring.service.impl;
 import com.levelup.spring.dao.ChartsRepository;
 import com.levelup.spring.service.ChartsService;
 import com.levelup.stock.model.PieChartTest;
+import com.levelup.stock.model.dto.LineChartZoom;
 import com.levelup.stock.model.dto.PieChartData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,10 @@ public class ChartsServiceImpl implements ChartsService{
         }
         return pieChartTestList;
     }
+
+    public List<LineChartZoom> getDataForLineChart(Long id, Long beginTime, Long endTime){
+        List<LineChartZoom> list = chartsRepository.getDataForLineChart(id, beginTime, endTime);
+        return list;
+    };
 
 }

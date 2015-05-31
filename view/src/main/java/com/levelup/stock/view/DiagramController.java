@@ -1,12 +1,12 @@
 package com.levelup.stock.view;
 
 import com.levelup.spring.dao.DealRepository;
-import com.levelup.spring.dao.impl.DealRepositoryImpl;
 import com.levelup.spring.service.ChartsService;
 import com.levelup.stock.model.BasicColumnChart;
 import com.levelup.stock.model.PieChartTest;
 import com.levelup.stock.model.User;
 import com.levelup.stock.model.dto.BasicBarChart;
+import com.levelup.stock.model.dto.LineChartZoom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/diagram")
@@ -43,12 +42,6 @@ public class DiagramController {
     @ResponseBody
     List<PieChartTest> getDataListForPieChart(@ModelAttribute("user") User user, @RequestParam("dateBegin") Long dateFrom,
                                               @RequestParam("dateEnd") Long dateTo) {
-//        List<PieChartTest> dataList = new ArrayList<PieChartTest>();
-//        dataList.add(new PieChartTest("McDonald's", 30.5));
-//        dataList.add(new PieChartTest("King Burger", 25.5));
-//        dataList.add(new PieChartTest("Fufelok", 40.5));
-//        dataList.add(new PieChartTest("Others", 3.5));
-//        return dealService.getAllUniqe(user.getEmail(), dateFrom, dateTo);
         return chartsService.getPieChartValidData(user.getId(), dateFrom, dateTo);
     }
 
@@ -93,18 +86,9 @@ public class DiagramController {
     @RequestMapping(value = "/basicLineChart/data", produces = "application/json", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<Double> getDataListForBasicLine() {
-
-        List<Double> dataList = new ArrayList<>();
-        Random r = new Random();
-        double rangeMin = 400;
-        double rangeMax = 1000;
-
-        for (int i = 0; i < 100; i++) {
-            double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-            dataList.add(randomValue);
-        }
-        return dataList;
+    List<LineChartZoom>  getDataForLineChart (@ModelAttribute("user") User user, @RequestParam("dateBegin") Long dateFrom,
+                                              @RequestParam("dateEnd") Long dateTo){
+        return chartsService.getDataForLineChart(user.getId(), dateFrom, dateTo);
     }
 
     @RequestMapping(value = "/basicBarChart", method = RequestMethod.GET)

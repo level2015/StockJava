@@ -1,5 +1,6 @@
 package com.levelup.spring.dao;
 
+import com.levelup.stock.model.dto.LineChartZoom;
 import com.levelup.stock.model.dto.PieChartData;
 
 import java.util.List;
@@ -10,4 +11,5 @@ import java.util.List;
 public interface ChartsRepository {
     public List<PieChartData> getDataForPieChart (Long id, Long beginTime, Long endTime);
     public void getDataForBasicColumnChart (Long id, Long beginTime, Long endTime);
+    public List<LineChartZoom> getDataForLineChart(Long id, Long beginTime, Long endTime);
 }
