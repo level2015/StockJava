@@ -19,9 +19,9 @@ import java.util.List;
 @RequestMapping("/diagram")
 @SessionAttributes("user")
 public class DiagramController {
-    @Autowired
+   @Autowired
 //    DealService dealService;
-            ChartsService chartsService;
+           ChartsService chartsService;
     @Autowired
     DealRepository dealRepository;
 

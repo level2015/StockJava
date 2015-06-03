@@ -7,7 +7,7 @@ import java.util.Set;
 public class BasicBarChart {
     private String name;
     private List<Double> data;
-    private Set<String> year;
+    private List<String> year;
 
     public BasicBarChart() {
     }
@@ -17,11 +17,11 @@ public class BasicBarChart {
         this.data = data;
     }
 
-    public Set<String> getYear() {
+    public List<String> getYear() {
         return year;
     }
 
-    public void setYear(Set<String> year) {
+    public void setYear(List<String> year) {
         this.year = year;
     }
 

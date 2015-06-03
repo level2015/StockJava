@@ -47,7 +47,7 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
         try {
             Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
 //        String queryStr="select d.symbol, sum(d.profit) as profitSum from Deal d group by d.symbol";
-            //      TypedQuery<SymbolProfit> query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime>:param and d.userId=:userID group by d.symbol", SymbolProfit.class);
+//          TypedQuery<SymbolProfit> query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime>:param and d.userId=:userID group by d.symbol", SymbolProfit.class);
             Query query = entityManager.createQuery("select d.symbol, sum(d.profit) as profitSum from Deal d where d.closeTime Between:beginD and :endD and d.userId=:userID group by d.symbol");
             query.setParameter("userID", userId);
             query.setParameter("beginD", beginD);
@@ -71,68 +71,25 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
     }
 
     @Override
-    public List<BasicBarChart> getSumProfit(String userEmail, Long beginTime, Long endTime) {
-        try {
-        Object beginD = new java.sql.Timestamp(beginTime);
-        Object endD = new java.sql.Timestamp(endTime);
-
-            Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
-            Query query = entityManager.createQuery("select d.symbol, round(sum(d.profit),2) as profitSum, Year(d.closeTime)  from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol");
-
-            query.setParameter("userID", userId);
-            query.setParameter("beginD", beginD);
-            query.setParameter("endD", endD);
-
-            List<Object[]> queryResultList = query.getResultList();
-            List<BasicBarChart> listBasicBarChart = new ArrayList<>();
-            Set<String> years = new TreeSet<>();
-            boolean flag = false;
-
-            for (int i = 0; i < queryResultList.size(); i++) {
-                ArrayList<Double> listDoubleData = new ArrayList<>();
-                Object[] temp = queryResultList.get(i);
-
-                for (int j = 0; j < listBasicBarChart.size(); j++) {
-                    if (temp[0].equals(listBasicBarChart.get(j).getName())) {
-                        listDoubleData.addAll(listBasicBarChart.get(j).getData());
-                        listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                        listBasicBarChart.get(j).setData(listDoubleData);
-                        years.add(temp[2].toString());
-                        listBasicBarChart.get(j).setYear(years);
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    continue;
-                } else {
-                    listDoubleData = new ArrayList<>();
-                    BasicBarChart basicBarChart = new BasicBarChart();
-                    basicBarChart.setName(temp[0].toString());
-                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                    basicBarChart.setData(listDoubleData);
-                    years.add(temp[2].toString());
-                    basicBarChart.setYear(years);
-                    listBasicBarChart.add(basicBarChart);
-                }
-            }
-            return listBasicBarChart;
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
+    public List<BasicBarChart> getSumProf(String userEmail, Long beginTime, Long endTime) {
+        String query = "select d.symbol, round(sum(d.profit),2) as profitSum, date_format(d.closeTime, '20%y/%m') as da from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y %m'), d.symbol Order by date_format(d.closeTime, '%y %m') asc";
+        return getlistBasicBarChart(query, userEmail, beginTime, endTime);
     }
 
-@Override
-    public List<BasicBarChart> getSumProf(String userEmail, Long beginTime, Long endTime) {
+    @Override
+    public List<BasicBarChart> getSumProfit(String userEmail, Long beginTime, Long endTime) {
+        String query = "select d.symbol, round(sum(d.profit),2) as profitSum, Year(d.closeTime)  from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%y'), d.symbol Order by Year(d.closeTime) asc";
+        return getlistBasicBarChart(query, userEmail, beginTime, endTime);
+    }
+
+    //Осторожно говнокод!!!
+    public List<BasicBarChart> getlistBasicBarChart(String hqlQuery, String userEmail, Long beginTime, Long endTime) {
         try {
             Object beginD = new java.sql.Timestamp(beginTime);
             Object endD = new java.sql.Timestamp(endTime);
 
             Long userId = userRepository.getUserByEmail(userEmail).get(0).getId();
-            Query query = entityManager.createQuery("select d.symbol, round(sum(d.profit),2) as profitSum, date_format(d.closeTime, '20%y/%m') as da from Deal d where d.closeTime Between :beginD and :endD and d.userId=:userID group by date_format(d.closeTime, '%m'), d.symbol Order by date_format(closeTime, '%y %m') asc");
-
+            Query query = entityManager.createQuery(hqlQuery);
             query.setParameter("userID", userId);
             query.setParameter("beginD", beginD);
             query.setParameter("endD", endD);
@@ -140,19 +97,21 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
             List<Object[]> queryResultList = query.getResultList();
             List<BasicBarChart> listBasicBarChart = new ArrayList<>();
             Set<String> years = new TreeSet<>();
-            boolean flag = false;
+            ArrayList<Double> listDoubleData = new ArrayList<>(years.size());
 
-            for (int i = 0; i < queryResultList.size(); i++) {
-                ArrayList<Double> listDoubleData = new ArrayList<>();
-                Object[] temp = queryResultList.get(i);
-
-                for (int j = 0; j < listBasicBarChart.size(); j++) {
-                    if (temp[0].equals(listBasicBarChart.get(j).getName())) {
-                        listDoubleData.addAll(listBasicBarChart.get(j).getData());
-                        listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                        listBasicBarChart.get(j).setData(listDoubleData);
+            for (Object[] temp : queryResultList) {
+                years.add(temp[2].toString());
+            }
+            for (int i = 0; i < years.size(); i++) {
+                listDoubleData.add(null);
+            }
+            for (Object[] temp : queryResultList) {
+                boolean flag = false;
+                for (BasicBarChart aListBasicBarChart : listBasicBarChart) {
+                    if (temp[0].equals(aListBasicBarChart.getName())) {
                         years.add(temp[2].toString());
-                        listBasicBarChart.get(j).setYear(years);
+                        aListBasicBarChart.setYear(new ArrayList<>(years));
+                        aListBasicBarChart.setData(new ArrayList(listDoubleData));
                         flag = true;
                         break;
                     }
@@ -160,21 +119,30 @@ public class DealRepositoryImpl extends AbstractRepository<Deal> implements Deal
                 if (flag) {
                     continue;
                 } else {
-                    listDoubleData = new ArrayList<>();
                     BasicBarChart basicBarChart = new BasicBarChart();
                     basicBarChart.setName(temp[0].toString());
-                    listDoubleData.add(Double.parseDouble(temp[1].toString()));
-                    basicBarChart.setData(listDoubleData);
                     years.add(temp[2].toString());
-                    basicBarChart.setYear(years);
+                    basicBarChart.setYear(new ArrayList<>(years));
+                    basicBarChart.setData(new ArrayList(listDoubleData));
                     listBasicBarChart.add(basicBarChart);
                 }
             }
+            for (Object[] temp : queryResultList) {
+                for (BasicBarChart aListBasicBarChart : listBasicBarChart) {
+                    for (int k = 0; k < aListBasicBarChart.getYear().size(); k++) {
+                        if (temp[0].toString().equals(aListBasicBarChart.getName()) && temp[2].toString().equals(aListBasicBarChart.getYear().get(k))) {
+                            aListBasicBarChart.getData().set(k, Double.parseDouble(temp[1].toString()));
+                            break;
+                        }
+                    }
+                }
+            }
+            listBasicBarChart.get(0).setYear(new ArrayList<>(years));
             return listBasicBarChart;
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
     }
 }
+
