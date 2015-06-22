@@ -10,6 +10,7 @@ import com.levelup.spring.service.DealService;
 import com.levelup.spring.service.DropBoxService;
 import com.levelup.spring.service.UserService;
 //import com.levelup.spring.service.impl.DropBoxServiceImpl;
+import com.levelup.spring.service.VkApiService;
 import com.levelup.spring.service.impl.DropBoxServiceImpl;
 import com.levelup.stock.model.Deal;
 import com.levelup.stock.model.DropBoxFile;
@@ -39,7 +40,11 @@ public class UserController {
     DealRepository dealRepository;
 
     @Autowired
-    DropBoxService dropBoxService = new DropBoxServiceImpl();
+    DropBoxService dropBoxService;
+    //DropBoxService dropBoxService = new DropBoxServiceImpl();
+
+    @Autowired
+    VkApiService vkApiService;
 
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
@@ -224,6 +229,18 @@ public class UserController {
 
         System.out.println(nameFile);
 
+
+        return "";
+    }
+
+    @RequestMapping(value = "/vkLogIn")
+    public String dealCreate() {
+
+        try {
+            vkApiService.on();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return "";
     }
